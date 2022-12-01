@@ -1,0 +1,52 @@
+@use "../../main.scss" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid $orange;
+  width: 100vw;
+  height: 72px;
+  padding: 0px 24px;
+
+  &__left,
+  &__right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  &__logo {
+    width: 77px;
+    margin-right: 32px;
+  }
+
+  &__nav {
+    display: flex;
+  }
+
+  &__link {
+    margin-right: 28px;
+    @include font(400, 18px);
+    border: 2px solid transparent;
+    &:hover {
+      border-bottom: 2px solid $orange;
+    }
+  }
+
+  &__create-text {
+    margin-left: 8px;
+    margin-right: 36px;
+  }
+
+  &__create-event {
+    display: flex;
+    @include font(400, 18px);
+    color: $orange;
+  }
+  &__avatar {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
