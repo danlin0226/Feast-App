@@ -1,4 +1,5 @@
 import "./App.scss";
+import Card from "./components/card/Card";
 
 import Header from "./components/header/Header";
 import Hero from "./components/hero/Hero";
@@ -8,6 +9,7 @@ function App() {
     <>
       <Header />
       <Hero />
+      <Card />
     </>
   );
 }

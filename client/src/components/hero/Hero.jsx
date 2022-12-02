@@ -8,12 +8,13 @@ const Hero = () => {
       <div className="hero__text-cont">
         <h1 className="hero__header">Connect with foodies</h1>
         <h4 className="hero__subheader">Find events in your city</h4>
-        <form action="">
+        <form className="hero__form" action="">
           <input
             className="hero__searchbar"
             type="text"
             name="city"
-            value="Vancouver"
+            // value="Vancouver"
+            placeholder="Vancouver"
           />
           <button className="hero__submit"></button>
         </form>
