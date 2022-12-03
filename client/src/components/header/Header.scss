@@ -36,12 +36,12 @@
   &__create-text {
     margin-left: 8px;
     margin-right: 36px;
+    color: $orange;
   }
 
   &__create-event {
     display: flex;
     @include font(400, 18px);
-    color: $orange;
   }
   &__avatar {
     height: 40px;

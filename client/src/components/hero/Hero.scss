@@ -15,7 +15,6 @@
   padding: 0 50px;
 
   &__text-cont {
-    color: white;
     margin-top: 95px;
   }
 
@@ -23,8 +22,10 @@
     margin: 0px;
     letter-spacing: 0.02em;
     @include font(500, 48px);
+    color: white;
   }
   &__subheader {
+    color: white;
     margin: 0px;
     margin-bottom: 24px;
     letter-spacing: 0.02em;

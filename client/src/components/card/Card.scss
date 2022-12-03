@@ -1,0 +1,46 @@
+@use "../../main.scss" as *;
+
+.card {
+  width: 324px;
+  border-radius: 6px;
+  //   border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 20px 1px rgba(52, 52, 52, 0.1);
+
+  &__img {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+  }
+
+  &__text-cont {
+    padding: 24px 24px 30px 24px;
+  }
+
+  &__header {
+    @include sh2;
+  }
+
+  &__info-cont {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  &__subheader {
+    @include b1;
+    color: $orange;
+  }
+
+  &__label {
+    display: flex;
+    gap: 8px;
+  }
+  &__text {
+    @include b2;
+  }
+
+  &__icon {
+    width: 24px;
+  }
+}

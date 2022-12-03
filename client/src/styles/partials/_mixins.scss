@@ -2,3 +2,46 @@
   font-weight: $weight;
   font-size: $font_size;
 }
+
+//typography
+
+@mixin h1 {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 72px;
+}
+
+@mixin h2 {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 60px;
+  letter-spacing: 0.02em;
+}
+
+@mixin sh1 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  letter-spacing: 0.02em;
+}
+
+@mixin sh2 {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+  letter-spacing: 0.02em;
+}
+
+@mixin b1 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0.02em;
+}
+
+@mixin b2 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+}
