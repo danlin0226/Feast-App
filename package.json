@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "(cd client && npm install); (cd server && npm install && npm run migrate:down && npm run migrate && npm run seed)",
     "client": "npm start --prefix ./client",
     "server": "nodemon ./server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""

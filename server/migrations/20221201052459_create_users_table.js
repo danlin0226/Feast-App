@@ -7,6 +7,7 @@ exports.up = function (knex) {
     table.uuid("id").primary();
     table.string("email").notNullable();
     table.string("name").notNullable();
+    table.string("avatar");
     table.string("age");
     table.string("gender");
     table.string("city");

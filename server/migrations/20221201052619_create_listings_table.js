@@ -11,6 +11,7 @@ exports.up = function (knex) {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
     table.string("name").notNullable();
+    table.string("image").notNullable();
     table.string("location").notNullable();
     table.string("time").notNullable();
     table.string("about").notNullable();
