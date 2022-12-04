@@ -1,16 +1,23 @@
 import "./App.scss";
-import Card from "./components/card/Card";
+
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import ExplorePage from "./pages/ExplorePage";
 
 import Header from "./components/header/Header";
-import Hero from "./components/hero/Hero";
-import CardListings from "./components/card-listings/CardListings";
+// import CardListings from "./components/card-listings/CardListings";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
     <>
       <Header />
-      <Hero />
-      <CardListings />
+      <Routes>
+        <Route path="/" element={<ExplorePage />} />
+        <Route path="/explore" element={<ExplorePage />} />
+        <Route path="*" element={<Navigate to="/explore" />} />
+      </Routes>
+      <Footer />
     </>
   );
 }

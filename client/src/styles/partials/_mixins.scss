@@ -3,6 +3,18 @@
   font-size: $font_size;
 }
 
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  @content;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  @content;
+}
+
 //typography
 
 @mixin h1 {
