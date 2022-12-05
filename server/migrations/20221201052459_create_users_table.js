@@ -17,6 +17,7 @@ exports.up = function (knex) {
     table.string("fb");
     table.string("ig");
     table.string("tt");
+    table.json("info");
   });
 };
 
