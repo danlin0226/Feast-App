@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 import {
   createUserWithEmailAndPassword,
+  getIdToken,
   onAuthStateChanged,
 } from "firebase/auth";
+
 import { auth } from "../../firebase";
 
 const SignUp = () => {
@@ -19,21 +21,21 @@ const SignUp = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      currentUser.getIdToken().then((res) => {
-        setToken(res);
-      });
+      window.localStorage.setItem("auth", true);
     });
   }, []);
 
   const register = async (e) => {
     e.preventDefault();
     try {
-      const user = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
-      console.log(user);
+
+      const token = await auth.currentUser.getIdToken();
+      console.log(token);
     } catch (error) {
       console.log(error.message);
     }

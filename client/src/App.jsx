@@ -10,6 +10,7 @@ import Footer from "./components/footer/Footer";
 
 import SignUp from "./components/sign-up/SignUp";
 import SignIn from "./components/sign-in/SignIn";
+import Bio from "./components/bio/Bio";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/bio" element={<Bio />} />
         <Route path="*" element={<Navigate to="/explore" />} />
       </Routes>
       <Footer />

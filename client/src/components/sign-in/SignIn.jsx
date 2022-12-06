@@ -23,10 +23,10 @@ const LogIn = () => {
 
       if (currentUser) {
         setUser(currentUser);
-        currentUser.getIdToken().then((token) => {
-          setToken(token);
-          window.localStorage.setItem("token", token);
-        });
+        window.localStorage.setItem("auth", true);
+        // currentUser.getIdToken().then((token) => {
+        //   setToken(token);
+        // });
       }
     });
   }, []);
@@ -49,7 +49,7 @@ const LogIn = () => {
   const logOut = async (e) => {
     e.preventDefault();
     await signOut(auth);
-    window.localStorage.removeItem("token");
+    window.localStorage.setItem("auth", false);
     console.log("logged out");
   };
 

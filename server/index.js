@@ -4,15 +4,18 @@ require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const logger = require("./middleware/logger");
-// const studentRoutes = require("./routes/studentRoutes");
+const authMiddleware = require("./middleware/authMiddleware");
+const authRoutes = require("./routes/authRoutes");
+const bioRoutes = require("./routes/bioRoutes");
 // const educatorRoutes = require("./routes/educatorRoutes");
 
 // middlewares
 // app.use(logger);
 app.use(cors());
 app.use(express.json());
-// app.use("/api/students", studentRoutes);
+app.use("/", authMiddleware);
+app.use("/auth", authRoutes);
+app.use("/bio", bioRoutes);
 // app.use("/api/educators", educatorRoutes);
 
 app.use(express.static(path.join(__dirname, "public")));
