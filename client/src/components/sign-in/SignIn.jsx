@@ -39,8 +39,8 @@ const LogIn = () => {
         loginEmail,
         loginPassword
       );
-
-      console.log(user);
+      const token = await auth.currentUser.getIdToken();
+      console.log(token);
     } catch (error) {
       console.log(error.message);
     }
