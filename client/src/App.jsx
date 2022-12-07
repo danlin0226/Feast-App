@@ -11,6 +11,7 @@ import Footer from "./components/footer/Footer";
 import SignUp from "./components/sign-up/SignUp";
 import SignIn from "./components/sign-in/SignIn";
 import Bio from "./components/bio/Bio";
+import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ExplorePage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/post-details/:id" element={<PostDetailsPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/bio" element={<Bio />} />

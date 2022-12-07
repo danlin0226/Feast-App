@@ -1,16 +1,14 @@
 @use "../../main.scss" as *;
 
 .hero {
-  display: flex;
-  height: 400px;
+  @include flex-row;
+  @include hero;
   background-image: linear-gradient(
       90deg,
       rgba(30, 30, 30, 0.72) 1.46%,
       rgba(30, 30, 30, 0.08) 63.13%
     ),
     url("../../assets/hero-img/explore.jpg");
-  background-size: cover;
-  background-position: 0% 50%;
   padding: 0 50px;
 
   &__text-cont {
@@ -31,7 +29,7 @@
     @include font(400, 18px);
   }
   &__form {
-    display: flex;
+    @include flex-row;
   }
 
   &__searchbar {
