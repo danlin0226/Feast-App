@@ -61,7 +61,7 @@ const SignUp = () => {
         <label htmlFor="password">
           password:
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             ref={passwordRef}
