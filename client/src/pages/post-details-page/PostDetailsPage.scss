@@ -1,0 +1,143 @@
+@use "../../main.scss" as *;
+
+.details {
+  @include flex-column;
+  background-color: #f9f9f9;
+  align-items: center;
+  justify-content: center;
+
+  &__hero {
+    @include hero;
+    width: 100%;
+  }
+
+  &__top-cont {
+    max-width: 1440px;
+    width: 100%;
+    // border: 2px solid red;
+  }
+
+  &__breadcrumb-text {
+    @include b1;
+    @include flex-row;
+    padding: 0 48px;
+    margin-top: 32px;
+  }
+
+  &__icon {
+    width: 24px;
+  }
+  &__tag-cont {
+    @include flex-row;
+    padding: 0 48px;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  &__tag {
+    @include b1;
+    background-color: $teal;
+    padding: 10px 30px;
+    color: $white;
+    border-radius: 100px;
+  }
+  &__bottom-cont {
+    @include flex-row;
+    margin-top: 32px;
+    max-width: 1440px;
+  }
+  &__left-cont {
+    // border: 2px solid red;
+    padding: 0 48px;
+  }
+  &__title {
+    @include h1;
+    &--orange {
+      color: $orange;
+    }
+  }
+
+  &__host {
+    @include b1;
+    @include flex-row;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  &__host-text {
+    color: $teal;
+    margin-left: -8px;
+  }
+
+  &__info-card-cont {
+    @include flex-row;
+    gap: 32px;
+    margin-top: 40px;
+  }
+  &__info-card {
+    @include flex-row;
+    @include b2;
+    align-items: flex-start;
+    width: 340px;
+    background-color: $white;
+    border-radius: 6px;
+    padding: 12px;
+    gap: 12px;
+  }
+  &__map {
+    margin-top: 32px;
+    width: 100%;
+    border-radius: 6px;
+  }
+
+  &__about-title {
+    @include sh1;
+    margin-top: 32px;
+  }
+  &__about-text {
+    @include b2;
+    margin-top: 8px;
+    margin-bottom: 80px;
+  }
+
+  &__right-cont {
+    padding: 0 48px;
+    @include flex-column;
+    flex-basis: 45%;
+    // border: 2px solid red;
+  }
+
+  &__sign-up {
+    @include button-text;
+    background-color: $orange;
+    text-align: center;
+    padding: 10px;
+  }
+  &__spots {
+    @include b2;
+    text-align: center;
+    margin-top: 12px;
+  }
+  &__attending-cont {
+    // border: 2px solid red;
+    box-shadow: 0px 4px 20px 1px rgba(52, 52, 52, 0.1);
+    margin-top: 36px;
+    border-radius: 6px;
+    background-color: $white;
+    height: 380px;
+    padding: 16px 24px;
+  }
+
+  &__attending-label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  &__attending-avatars {
+    margin-top: 16px;
+    @include flex-row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}

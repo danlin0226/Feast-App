@@ -1,0 +1,37 @@
+@use "../../main.scss" as *;
+
+.footer {
+  height: 88px;
+  background-color: $teal;
+  padding: 0px 48px;
+  @include flex-row {
+    align-items: center;
+    // justify-content: space-around;
+  }
+  & > * {
+    flex: 1;
+  }
+
+  &__logo {
+    display: flex;
+  }
+
+  &__text-cont {
+    @include flex-row {
+      justify-content: center;
+    }
+    gap: 24px;
+  }
+
+  &__text {
+    @include b2;
+    color: white;
+  }
+
+  &__social-cont {
+    @include flex-row {
+      justify-content: flex-end;
+    }
+    gap: 16px;
+  }
+}

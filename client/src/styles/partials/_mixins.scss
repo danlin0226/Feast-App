@@ -1,0 +1,79 @@
+@mixin font($weight, $font_size) {
+  font-weight: $weight;
+  font-size: $font_size;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  @content;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  @content;
+}
+
+//typography
+
+@mixin h1 {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 72px;
+  letter-spacing: 0.02em;
+}
+
+@mixin h2 {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 60px;
+  letter-spacing: 0.02em;
+}
+
+@mixin sh1 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  letter-spacing: 0.02em;
+}
+
+@mixin sh2 {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 33px;
+  letter-spacing: 0.02em;
+}
+
+@mixin b1 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0.02em;
+}
+
+@mixin b2 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+}
+
+@mixin button-text {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0.02em;
+  color: white;
+  border-radius: 6px;
+}
+
+//component styling
+
+@mixin hero {
+  background-size: cover;
+  background-position: 0% 50%;
+  height: 400px;
+  object-fit: cover;
+  // object-position: 0 50%;
+}

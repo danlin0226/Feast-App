@@ -1,0 +1,61 @@
+@use "../../main.scss" as *;
+
+.hero {
+  @include flex-row;
+  @include hero;
+  background-image: linear-gradient(
+      90deg,
+      rgba(30, 30, 30, 0.72) 1.46%,
+      rgba(30, 30, 30, 0.08) 63.13%
+    ),
+    url("../../assets/hero-img/explore.jpg");
+  padding: 0 50px;
+
+  &__text-cont {
+    margin-top: 95px;
+  }
+
+  &__header {
+    margin: 0px;
+    letter-spacing: 0.02em;
+    @include font(500, 48px);
+    color: white;
+  }
+  &__subheader {
+    color: white;
+    margin: 0px;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+    @include font(400, 18px);
+  }
+  &__form {
+    @include flex-row;
+  }
+
+  &__searchbar {
+    margin-top: 0px;
+    height: 48px;
+    width: 318px;
+    border: 0px;
+    outline: 0px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    padding: 0px 48px;
+    @include font(600, 18px);
+    background: white url("../../assets/icons/map-pin.svg") no-repeat 13px
+      center;
+    &::placeholder {
+      color: black;
+    }
+  }
+
+  &__submit {
+    height: 48px;
+    width: 54px;
+    background-color: $teal;
+    border: 0px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: $teal url("../../assets/icons/search.png") no-repeat center;
+  }
+}
