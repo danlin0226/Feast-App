@@ -57,6 +57,7 @@ const create = (req, res) => {
 
 const update = (req, res) => {
   knex("listings")
+    .where({ id: req.params.id })
     .update(req.body)
     .then(() => {
       knex("listings")

@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import Card from "../../components/card/Card";
 import "./CardListings.scss";
 
 const CardListings = () => {
+  const [posts, SetPosts] = useState();
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/").then((res) => {
+      SetPosts(res.data);
+    });
+  }, []);
+
   return (
     <div className="listings">
       <div className="listings__filters">
@@ -18,12 +27,10 @@ const CardListings = () => {
         </select>
       </div>
       <div className="listings__card-cont">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {posts &&
+          posts.map((post) => {
+            return <Card key={post.id} data={post} />;
+          })}
       </div>
     </div>
   );
