@@ -22,6 +22,7 @@
     @include flex-row;
     padding: 0 48px;
     margin-top: 32px;
+    cursor: pointer;
   }
 
   &__icon {
@@ -46,7 +47,7 @@
     max-width: 1440px;
   }
   &__left-cont {
-    // border: 2px solid red;
+    flex: 1;
     padding: 0 48px;
   }
   &__title {
@@ -102,7 +103,8 @@
   &__right-cont {
     padding: 0 48px;
     @include flex-column;
-    flex-basis: 45%;
+    flex: 0.31;
+    // width: 25%;
     // border: 2px solid red;
   }
 

@@ -2,16 +2,14 @@ import React from "react";
 
 import "./Avatar.scss";
 
-import avatar from "../../assets/profile-pics/steph.jpg";
-
-const Avatar = () => {
+const Avatar = ({ avatar, modal }) => {
   return (
-    <div className="avatar-cont">
+    <div className="avatar-cont" onClick={modal}>
       <img
         className="avatar"
         src={avatar}
         onError={(i) => (i.target.style.display = "none")}
-        alt="avatar"
+        alt=""
       />
     </div>
   );

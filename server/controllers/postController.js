@@ -15,7 +15,13 @@ const findUserPosts = (req, res) => {
 const findOne = (req, res) => {
   console.log(req.params);
   knex("listings")
-    .where({ id: req.params.id })
+    .select(
+      "listings.*",
+      "users.avatar AS user_avatar",
+      "users.name AS user_name"
+    )
+    .join("users", "listings.user_id", "users.id")
+    .where({ "listings.id": req.params.id })
     .then((data) => {
       if (data.length === 0) {
         res.status(404).send("Posts not found");

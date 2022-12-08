@@ -1,5 +1,4 @@
 import React from "react";
-import noodles from "../../assets/food/noodles.jpg";
 import pin from "../../assets/icons/map-pin.svg";
 import userCircle from "../../assets/icons/user-circle.svg";
 
@@ -8,7 +7,6 @@ import { Link } from "react-router-dom";
 import "./Card.scss";
 
 const Card = ({ data }) => {
-  console.log(data);
   return (
     <Link to={`/post-details/${data.id}`}>
       <article className="card">

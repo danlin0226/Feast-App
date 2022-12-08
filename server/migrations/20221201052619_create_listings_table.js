@@ -14,9 +14,10 @@ exports.up = function (knex) {
     table.string("image").notNullable();
     table.string("location").notNullable();
     table.string("time").notNullable();
-    table.string("about").notNullable();
+    table.text("about").notNullable();
     table.integer("spots").notNullable();
-    table.integer("address").notNullable();
+    table.string("address").notNullable();
+    table.json("requests");
   });
 };
 

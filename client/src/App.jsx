@@ -1,6 +1,8 @@
 import "./App.scss";
 
 import { Routes, Route, Navigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 
 import ExplorePage from "./pages/ExplorePage";
 
@@ -12,17 +14,49 @@ import SignUp from "./components/sign-up/SignUp";
 import SignIn from "./components/sign-in/SignIn";
 import Bio from "./components/bio/Bio";
 import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [signedIn, setSignedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const [userBio, setUserBio] = useState({});
+
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  //   setSignedIn(true);
+  // });
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      axios
+        .get("http://localhost:8080/auth/bio", {
+          headers: {
+            Authorization: `Bearer ${currentUser.accessToken}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setUserBio(res.data);
+          setSignedIn(true);
+        });
+      setUser(currentUser);
+    });
+  }, []);
+
+  const signIn = (data) => {
+    setUser(data);
+  };
+
   return (
     <>
-      <Header />
+      <Header userBio={userBio} signedIn={signedIn} />
       <Routes>
         <Route path="/" element={<ExplorePage />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/post-details/:id" element={<PostDetailsPage />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn signIn={signIn} />} />
         <Route path="/bio" element={<Bio />} />
         <Route path="*" element={<Navigate to="/explore" />} />
       </Routes>
