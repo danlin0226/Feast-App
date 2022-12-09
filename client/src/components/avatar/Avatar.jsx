@@ -2,9 +2,12 @@ import React from "react";
 
 import "./Avatar.scss";
 
-const Avatar = ({ avatar, modal }) => {
+const Avatar = ({ avatar, modal, large }) => {
   return (
-    <div className="avatar-cont" onClick={modal}>
+    <div
+      className={`avatar-cont ${large && "avatar-cont--large"}`}
+      onClick={modal}
+    >
       <img
         className="avatar"
         src={avatar}

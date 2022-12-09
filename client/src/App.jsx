@@ -12,7 +12,7 @@ import Footer from "./components/footer/Footer";
 
 import SignUp from "./components/sign-up/SignUp";
 import SignIn from "./components/sign-in/SignIn";
-import Bio from "./components/bio/Bio";
+import BioPage from "./pages/bio-page/BioPage";
 import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -21,11 +21,6 @@ function App() {
   const [signedIn, setSignedIn] = useState(false);
   const [user, setUser] = useState({});
   const [userBio, setUserBio] = useState({});
-
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   setUser(currentUser);
-  //   setSignedIn(true);
-  // });
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -54,10 +49,11 @@ function App() {
       <Routes>
         <Route path="/" element={<ExplorePage />} />
         <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/post-details/:id" element={<PostDetailsPage />} />
+        <Route path="/event-details/:id" element={<PostDetailsPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn signIn={signIn} />} />
-        <Route path="/bio" element={<Bio />} />
+        <Route path="/bio" element={<BioPage userBio={userBio} />} />
+        <Route path="/create-event" element={<BioPage userBio={userBio} />} />
         <Route path="*" element={<Navigate to="/explore" />} />
       </Routes>
       <Footer />

@@ -28,7 +28,7 @@ const Header = ({ userBio, signedIn }) => {
         <h4 className="header__link">
           {" "}
           <NavLink
-            to="/post-details/2"
+            to="/event-details/2"
             className={({ isActive }) =>
               isActive ? activeClassName : undefined
             }
