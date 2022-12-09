@@ -2,6 +2,7 @@ const knex = require("knex")(require("../knexfile"));
 
 const signup = (req, res) => {
   // console.log(req.headers);
+  console.log("posted user to user table");
   console.log(req.user);
   const userId = req.user.uid;
   const email = req.user.email;
