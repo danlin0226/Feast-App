@@ -1,0 +1,6 @@
+@use "../../main.scss" as *;
+
+.uploaded-img {
+  @include hero;
+  width: 100%;
+}

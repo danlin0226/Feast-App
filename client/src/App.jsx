@@ -16,6 +16,7 @@ import BioPage from "./pages/bio-page/BioPage";
 import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CreateEventPage from "./pages/create-event-page/CreateEventPage";
 
 function App() {
   const [signedIn, setSignedIn] = useState(false);
@@ -53,7 +54,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn signIn={signIn} />} />
         <Route path="/bio" element={<BioPage userBio={userBio} />} />
-        <Route path="/create-event" element={<BioPage userBio={userBio} />} />
+        <Route path="/create-event" element={<CreateEventPage />} />
         <Route path="*" element={<Navigate to="/explore" />} />
       </Routes>
       <Footer />

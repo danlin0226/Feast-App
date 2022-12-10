@@ -38,10 +38,12 @@ const Header = ({ userBio, signedIn }) => {
         </h4>
       </div>
       <div className="header__right">
-        <div className="header__create-event">
-          <img className="header__create-icon" src={plus} alt="" />
-          <p className="header__create-text">Create Event</p>
-        </div>
+        <Link to="/create-event">
+          <div className="header__create-event">
+            <img className="header__create-icon" src={plus} alt="" />
+            <p className="header__create-text">Create Event</p>
+          </div>
+        </Link>
         <Link to={signedIn ? "/bio" : "register"}>
           <Avatar avatar={userBio.avatar} />
         </Link>

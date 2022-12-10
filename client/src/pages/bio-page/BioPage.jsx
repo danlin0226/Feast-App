@@ -39,28 +39,19 @@ const Bio = ({ userBio }) => {
           <p className="bio__about">{userBio.about} </p>
           <div className="bio__prompt">
             <h4 className="bio__prompt-title">The best thing I ever ate...</h4>
-            <p className="bio__prompt-text">
-              I’m a Toronto native that just moved to Vancouver a few months
-              ago! I’m looking to meet new friends to explore new restaurants in
-              the city. In my spare time, you can find me training for my next
-              half marathon or hanging out with my pup, Roger.
-            </p>
+            <p className="bio__prompt-text">{userBio.prompt1}</p>
           </div>
           <div className="bio__prompt">
             <h4 className="bio__prompt-title">
               If I were to choose my last meal, it would be...
             </h4>
-            <p className="bio__prompt-text">
-              My mom’s homemade chili recipe, 100%.
-            </p>
+            <p className="bio__prompt-text">{userBio.prompt2}</p>
           </div>
           <div className="bio__prompt">
             <h4 className="bio__prompt-title">
               My next travel destination will be...
             </h4>
-            <p className="bio__prompt-text">
-              Singapore. Bring on the hawker stands!!
-            </p>
+            <p className="bio__prompt-text">{userBio.prompt3}</p>
           </div>
           <div className="bio__socials">
             <img src={fb} alt="" />
