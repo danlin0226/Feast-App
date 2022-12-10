@@ -4,3 +4,45 @@
   @include hero;
   width: 100%;
 }
+
+.create-event {
+  @include flex-column;
+  // border: 2px solid red;
+
+  &__dropzone {
+    width: 100%;
+  }
+}
+.form {
+  align-self: center;
+  // border: 2px solid red;
+  max-width: 856px;
+  width: 100%;
+  @include flex-row;
+  column-gap: 24px;
+  flex-wrap: wrap;
+
+  & > div {
+    // width: 100%;
+    flex: 40%;
+  }
+
+  div:nth-child(1) {
+    flex: 100%;
+  }
+
+  div:nth-child(8) {
+    flex: 100%;
+  }
+
+  &__button {
+    @include button-text;
+    background-color: $orange;
+    border: none;
+    font-weight: 400;
+    width: 200px;
+    margin: auto;
+    margin-top: 16px;
+    margin-bottom: 80px;
+  }
+}
