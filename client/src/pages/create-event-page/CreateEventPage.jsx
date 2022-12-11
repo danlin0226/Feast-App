@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./CreateEventPage.scss";
+import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import chevron from "../../assets/icons/chevron.png";
@@ -53,7 +54,7 @@ const MyUploadedFiles = ({ files }) =>
     );
   });
 
-const CreateEventPage = () => {
+const CreateEventPage = ({ token }) => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [values, setValues] = useState({
@@ -134,14 +135,56 @@ const CreateEventPage = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     setErrors(validate(values));
+
+    if (
+      !values.name ||
+      !values.location ||
+      !values.time ||
+      !values.address ||
+      !values.about ||
+      !values.spots ||
+      !values.cuisine ||
+      !values.meal
+    ) {
+      console.log("Not submitted");
+      return;
+    }
+
+    console.log({
+      name: values.name,
+      image: files[0].fileUrl,
+      location: values.location,
+      time: values.time,
+      about: values.about,
+      spots: values.spots,
+      address: values.address,
+    });
+    axios.post(
+      "http://localhost:8080/posts/",
+      {
+        name: values.name,
+        image: files[0].fileUrl,
+        location: values.location,
+        time: values.time,
+        about: values.about,
+        spots: values.spots,
+        address: values.address,
+      },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+
+    console.log("successfully submitted");
+
     setIsSubmit(true);
   };
 
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmit) {
-      console.log(values);
-    }
-  }, [errors]);
+  //   useEffect(() => {
+  //     if (Object.keys(errors).length === 0 && isSubmit) {
+  //       console.log(values);
+  //     }
+  //   }, [errors]);
 
   const validate = (values) => {
     const errors = {};

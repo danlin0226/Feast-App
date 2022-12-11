@@ -54,7 +54,10 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn signIn={signIn} />} />
         <Route path="/bio" element={<BioPage userBio={userBio} />} />
-        <Route path="/create-event" element={<CreateEventPage />} />
+        <Route
+          path="/create-event"
+          element={<CreateEventPage token={user.accessToken} />}
+        />
         <Route path="*" element={<Navigate to="/explore" />} />
       </Routes>
       <Footer />
