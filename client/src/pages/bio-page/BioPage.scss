@@ -2,6 +2,7 @@
 
 .bio {
   @include flex-column;
+  background-color: #f9f9f9;
   align-items: center;
   &__middle-cont {
     @include flex-column;
@@ -42,6 +43,7 @@
     width: 100%;
     gap: 16px;
     margin-bottom: 24px;
+    background-color: white;
   }
 
   &__prompt-title {

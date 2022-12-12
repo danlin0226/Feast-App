@@ -99,7 +99,7 @@ const PostDetailsPage = ({ token }) => {
   };
 
   return (
-    <div className="details">
+    <section className="details">
       <img className="details__hero" src={postData.image} alt="" />
       <div className="details__top-cont">
         <p
@@ -117,7 +117,6 @@ const PostDetailsPage = ({ token }) => {
           <div className="details__tag">Brunch</div>
         </div>
       </div>
-
       <div className="details__bottom-cont">
         <div className="details__left-cont">
           <h2 className="details__title">
@@ -173,6 +172,7 @@ const PostDetailsPage = ({ token }) => {
           </div>
         </div>
       </div>
+      g
       {isOpen && (
         <Modal setIsOpen={setIsOpen}>
           <div className="request-modal">
@@ -240,7 +240,7 @@ const PostDetailsPage = ({ token }) => {
           </div>
         </Modal>
       )}
-    </div>
+    </section>
   );
 };
 

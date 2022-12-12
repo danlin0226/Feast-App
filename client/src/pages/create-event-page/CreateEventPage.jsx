@@ -221,7 +221,7 @@ const CreateEventPage = ({ token }) => {
   };
 
   return (
-    <div className="create-event">
+    <section className="create-event">
       <p
         className="details__breadcrumb-text"
         onClick={() => {
@@ -252,7 +252,7 @@ const CreateEventPage = ({ token }) => {
         })}
         <button className="form__button">Submit</button>
       </form>
-    </div>
+    </section>
   );
 };
 

@@ -39,4 +39,17 @@ const getRequests = (req, res) => {
     });
 };
 
-module.exports = { sendRequest, getRequests };
+const getUserRequests = (req, res) => {
+  knex("requests")
+    .join("listings", "requests.listing_id", "listings.id")
+    .where({ "requests.user_id": req.params.id })
+    .where({ "requests.status": "true" })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+module.exports = { sendRequest, getRequests, getUserRequests };

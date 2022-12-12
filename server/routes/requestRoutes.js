@@ -7,5 +7,6 @@ router
   .get(requestController.getRequests);
 
 router.route("/:id").get(requestController.getRequests);
+router.route("/user/:id").get(requestController.getUserRequests);
 
 module.exports = router;

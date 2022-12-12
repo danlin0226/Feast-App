@@ -4,8 +4,14 @@ import axios from "axios";
 import Card from "../../components/card/Card";
 import "./CardListings.scss";
 
-const CardListings = () => {
-  const [posts, SetPosts] = useState();
+const CardListings = ({ isHosting, uid, userRequestPosts }) => {
+  const [posts, SetPosts] = useState([]);
+  let filteredPost = posts;
+
+  if (isHosting) {
+    filteredPost = posts.filter((post) => post.user_id === uid);
+    console.log(filteredPost);
+  }
 
   useEffect(() => {
     axios.get("http://localhost:8080/").then((res) => {
@@ -27,10 +33,18 @@ const CardListings = () => {
         </select>
       </div>
       <div className="listings__card-cont">
-        {posts &&
-          posts.map((post) => {
+        {userRequestPosts
+          ? userRequestPosts.map((post) => {
+              return <Card key={post.id} data={post} />;
+            })
+          : posts &&
+            filteredPost.map((post) => {
+              return <Card key={post.id} data={post} />;
+            })}
+        {/* {posts &&
+          filteredPost.map((post) => {
             return <Card key={post.id} data={post} />;
-          })}
+          })} */}
       </div>
     </div>
   );

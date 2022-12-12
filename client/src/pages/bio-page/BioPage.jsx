@@ -12,7 +12,7 @@ import Avatar from "../../components/avatar/Avatar";
 const Bio = ({ userBio }) => {
   const navigate = useNavigate();
   return (
-    <>
+    <section>
       <p
         className="details__breadcrumb-text"
         onClick={() => {
@@ -59,7 +59,7 @@ const Bio = ({ userBio }) => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

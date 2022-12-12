@@ -17,6 +17,7 @@ import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CreateEventPage from "./pages/create-event-page/CreateEventPage";
+import MyEventsPage from "./pages/my-events-page/MyEventsPage";
 
 function App() {
   const [signedIn, setSignedIn] = useState(false);
@@ -51,12 +52,17 @@ function App() {
         <Route path="/" element={<ExplorePage />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route
+          path="/my-events"
+          element={<MyEventsPage token={user.accessToken} uid={user.uid} />}
+        />
+        <Route
           path="/event-details/:id"
           element={<PostDetailsPage token={user.accessToken} />}
         />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn signIn={signIn} />} />
         <Route path="/bio" element={<BioPage userBio={userBio} />} />
+
         <Route
           path="/create-event"
           element={<CreateEventPage token={user.accessToken} />}
