@@ -22,6 +22,12 @@ const PostDetailsPage = ({ token }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [postData, setPostData] = useState({});
+  const [requests, setRequests] = useState([]);
+
+  const activeRequests = requests.filter(
+    (request) => request.status === "true"
+  );
+  console.log("activeRequests", activeRequests);
 
   const m = () => {
     setIsOpen(!isOpen);
@@ -44,7 +50,23 @@ const PostDetailsPage = ({ token }) => {
     });
   }, [params.id]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    onAuthStateChanged(auth, async () => {
+      const token = await auth.currentUser.getIdToken();
+      axios
+        .get(`http://localhost:8080/requests/${params.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setRequests(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }, []);
 
   const submitRequestHandler = (e) => {
     e.preventDefault();
@@ -139,11 +161,14 @@ const PostDetailsPage = ({ token }) => {
           <div className="details__attending-cont">
             <p className="details__attending-label">Attending</p>
             <div className="details__attending-avatars">
-              <Avatar modal={m} />
-              <Avatar />
-              <Avatar />
-              <Avatar />
-              <Avatar />
+              {activeRequests.map((activeRequest) => {
+                return (
+                  <Avatar
+                    key={activeRequest.id}
+                    avatar={activeRequest.user_avatar}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

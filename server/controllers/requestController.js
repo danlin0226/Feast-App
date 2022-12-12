@@ -26,4 +26,17 @@ const sendRequest = (req, res) => {
     });
 };
 
-module.exports = { sendRequest };
+const getRequests = (req, res) => {
+  knex("requests")
+    .select("requests.*", "users.avatar AS user_avatar")
+    .join("users", "requests.user_id", "users.id")
+    .where({ "requests.listing_id": req.params.id })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+module.exports = { sendRequest, getRequests };
