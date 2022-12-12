@@ -8,8 +8,8 @@ import { useState } from "react";
 
 const MyEventsPage = ({ uid }) => {
   const [userRequestPosts, setUserRequestPosts] = useState([]);
-  const [attending, setAttending] = useState(true);
-  const [hosting, setHosting] = useState(false);
+  const [hosting, setHosting] = useState(true);
+  const [attending, setAttending] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -33,8 +33,8 @@ const MyEventsPage = ({ uid }) => {
       <div className="myEvents__nav">
         <div
           onClick={() => {
-            setAttending(true);
-            setHosting(false);
+            setAttending(false);
+            setHosting(true);
           }}
           className="myEvents__nav-item"
         >
@@ -42,16 +42,16 @@ const MyEventsPage = ({ uid }) => {
         </div>
         <div
           onClick={() => {
-            setAttending(false);
-            setHosting(true);
+            setAttending(true);
+            setHosting(false);
           }}
           className="myEvents__nav-item"
         >
           Attending
         </div>
       </div>
-      {attending && <CardListings isHosting={true} uid={uid} />}
-      {hosting && (
+      {hosting && <CardListings isHosting={true} uid={uid} editable={true} />}
+      {attending && (
         <CardListings
           isHosting={false}
           uid={uid}

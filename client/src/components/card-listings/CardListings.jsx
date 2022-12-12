@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 import Card from "../../components/card/Card";
 import "./CardListings.scss";
 
-const CardListings = ({ isHosting, uid, userRequestPosts }) => {
+const CardListings = ({ isHosting, uid, userRequestPosts, editable }) => {
+  let location = useLocation();
+  console.log(location);
+
   const [posts, SetPosts] = useState([]);
-  let filteredPost = posts;
+  let filteredPost;
 
   if (isHosting) {
     filteredPost = posts.filter((post) => post.user_id === uid);
@@ -33,18 +37,18 @@ const CardListings = ({ isHosting, uid, userRequestPosts }) => {
         </select>
       </div>
       <div className="listings__card-cont">
-        {userRequestPosts
-          ? userRequestPosts.map((post) => {
-              return <Card key={post.id} data={post} />;
-            })
-          : posts &&
-            filteredPost.map((post) => {
-              return <Card key={post.id} data={post} />;
-            })}
-        {/* {posts &&
-          filteredPost.map((post) => {
+        {userRequestPosts &&
+          userRequestPosts.map((post) => {
             return <Card key={post.id} data={post} />;
-          })} */}
+          })}
+        {filteredPost &&
+          filteredPost.map((post) => {
+            return <Card key={post.id} data={post} editable={editable} />;
+          })}
+        {location.pathname === "/explore" &&
+          posts.map((post) => {
+            return <Card key={post.id} data={post} />;
+          })}
       </div>
     </div>
   );

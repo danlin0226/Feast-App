@@ -6,9 +6,16 @@ import { Link } from "react-router-dom";
 
 import "./Card.scss";
 
-const Card = ({ data }) => {
+const Card = ({ data, editable }) => {
+  console.log(editable);
   return (
-    <Link to={`/event-details/${data.id}`}>
+    <Link
+      to={
+        editable
+          ? `/event-details/edit/${data.id}`
+          : `/event-details/${data.id}`
+      }
+    >
       <article className="card">
         <img className="card__img" src={data.image} alt="" />
         <div className="card__text-cont">

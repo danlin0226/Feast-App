@@ -15,7 +15,8 @@ import Avatar from "../../components/avatar/Avatar";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../components/modal/Modal";
 
-const PostDetailsPage = ({ token }) => {
+const PostDetailsPage = ({ token, editable }) => {
+  console.log("editable?", editable);
   const navigate = useNavigate();
   const params = useParams();
 
@@ -26,6 +27,10 @@ const PostDetailsPage = ({ token }) => {
 
   const activeRequests = requests.filter(
     (request) => request.status === "true"
+  );
+
+  const pendingRequests = requests.filter(
+    (request) => request.status === "false"
   );
   console.log("activeRequests", activeRequests);
 
