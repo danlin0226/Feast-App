@@ -70,6 +70,16 @@
 }
 
 //component styling
+@mixin button-text {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0.02em;
+  color: white;
+  border-radius: 6px;
+  padding: 10px;
+  border: none;
+}
 
 @mixin hero {
   background-size: cover;
@@ -77,4 +87,11 @@
   height: 400px;
   object-fit: cover;
   // object-position: 0 50%;
+}
+
+@mixin input {
+  border: none;
+  border-radius: 6px;
+  background-color: #f1f1f1;
+  padding: 16px;
 }

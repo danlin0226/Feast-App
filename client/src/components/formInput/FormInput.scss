@@ -8,11 +8,8 @@
   }
 
   &__input {
-    padding: 16px;
+    @include input;
     @include b1;
-    border: none;
-    border-radius: 6px;
-    background-color: #f1f1f1;
   }
 
   &__error {

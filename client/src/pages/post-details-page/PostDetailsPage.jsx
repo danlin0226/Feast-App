@@ -9,16 +9,18 @@ import chevron from "../../assets/icons/chevron.png";
 import pin from "../../assets/icons/map-pin-teal.svg";
 import calendar from "../../assets/icons/calendar.svg";
 import map from "../../assets/maps-placeholder.png";
+import success from "../../assets/success.png";
 
 import Avatar from "../../components/avatar/Avatar";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../components/modal/Modal";
 
-const PostDetailsPage = () => {
+const PostDetailsPage = ({ token }) => {
   const navigate = useNavigate();
   const params = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [postData, setPostData] = useState({});
 
   const m = () => {
@@ -41,6 +43,38 @@ const PostDetailsPage = () => {
         });
     });
   }, [params.id]);
+
+  useEffect(() => {}, []);
+
+  const submitRequestHandler = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(
+        "http://localhost:8080/requests",
+        {
+          listing_id: params.id,
+          prompt1: e.target.prompt1.value,
+          prompt2: e.target.prompt2.value,
+          prompt3: e.target.prompt3.value,
+          status: "false",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setIsOpen(false);
+        setIsSubmitted(true);
+      });
+  };
+
+  const submittedRequestHandler = (e) => {
+    e.preventDefault();
+    navigate("/explore");
+  };
 
   return (
     <div className="details">
@@ -92,9 +126,15 @@ const PostDetailsPage = () => {
           <p className="details__about-text">{postData.about}</p>
         </div>
         <div className="details__right-cont">
-          <a className="details__sign-up" href="">
+          <p
+            className="details__sign-up"
+            onClick={(e) => {
+              setIsOpen(true);
+            }}
+            href=""
+          >
             Sign Up
-          </a>
+          </p>
           <p className="details__spots">2/6 spots available</p>
           <div className="details__attending-cont">
             <p className="details__attending-label">Attending</p>
@@ -109,8 +149,70 @@ const PostDetailsPage = () => {
         </div>
       </div>
       {isOpen && (
-        <Modal title="Modal Title" setIsOpen={setIsOpen}>
-          <p>Modal content goes here...</p>
+        <Modal setIsOpen={setIsOpen}>
+          <div className="request-modal">
+            <h1 className="request-modal__title">
+              Just a couple of question...
+            </h1>
+            <form
+              action=""
+              className="request-modal__form"
+              onSubmit={submitRequestHandler}
+            >
+              <div className="request-modal__form-item">
+                <label htmlFor="prompt1" className="request-modal__label">
+                  Why do you want to come to this event
+                </label>
+                <textarea
+                  className="request-modal__input"
+                  name="prompt1"
+                  id="prompt1"
+                  rows="3"
+                />
+              </div>
+              <div className="request-modal__form-item">
+                <label htmlFor="prompt2" className="request-modal__label">
+                  Why do you want to come to this event
+                </label>
+                <textarea
+                  className="request-modal__input"
+                  name="prompt2"
+                  id="prompt2"
+                  rows="3"
+                />
+              </div>
+              <div className="request-modal__form-item">
+                <label htmlFor="prompt3" className="request-modal__label">
+                  Why do you want to come to this event
+                </label>
+                <textarea
+                  className="request-modal__input"
+                  rows="3"
+                  name="prompt3"
+                  id="prompt3"
+                />
+              </div>
+              <button className="request-modal__submit">Submit Request</button>
+            </form>
+          </div>
+        </Modal>
+      )}
+      {isSubmitted && (
+        <Modal setIsOpen={setIsSubmitted}>
+          <div className="success-modal">
+            <h1 className="success-modal__title">Request Submitted!</h1>
+            <img className="success-modal__img" src={success} alt="" />
+            <p className="success-modal__text">
+              You will get a notification once the host accepts or rejects your
+              requests
+            </p>
+            <button
+              onClick={submittedRequestHandler}
+              className="success-modal__submit"
+            >
+              Go to My Events
+            </button>
+          </div>
         </Modal>
       )}
     </div>

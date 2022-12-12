@@ -9,6 +9,7 @@ const authMiddleware = require("./middleware/authMiddleware");
 const authRoutes = require("./routes/authRoutes");
 const bioRoutes = require("./routes/bioRoutes");
 const postRoutes = require("./routes/postRoutes");
+const requestRoutes = require("./routes/requestRoutes");
 
 // middlewares
 // app.use(logger);
@@ -27,6 +28,7 @@ app.get("/", (_req, res) => {
 
 app.use("/", authMiddleware);
 app.use("/posts", postRoutes);
+app.use("/requests", requestRoutes);
 app.use("/auth", authRoutes);
 app.use("/auth/bio", bioRoutes);
 

@@ -2,14 +2,22 @@ import React from "react";
 
 import "./Modal.scss";
 
-function Modal({ children, title, setIsOpen }) {
+import close from "../../assets/icons/close.png";
+
+function Modal({ children, setIsOpen }) {
   return (
     <>
       <div className="modal-overlay">
-        <div className={`modal-content`}>
-          <h1>{title}</h1>
-          <button onClick={() => setIsOpen(false)}>Close</button>
-          {children}
+        <div className="modal-content">
+          <div className="modal">
+            <img
+              className="modal__close"
+              onClick={() => setIsOpen(false)}
+              src={close}
+              alt=""
+            />
+            {children}
+          </div>
         </div>
       </div>
     </>

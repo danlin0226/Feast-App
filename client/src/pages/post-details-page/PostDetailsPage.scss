@@ -14,7 +14,6 @@
   &__top-cont {
     max-width: 1440px;
     width: 100%;
-    // border: 2px solid red;
   }
 
   &__breadcrumb-text {
@@ -140,5 +139,70 @@
     @include flex-row;
     flex-wrap: wrap;
     gap: 16px;
+  }
+}
+
+.request-modal {
+  @include flex-column;
+  justify-content: center;
+  height: 100%;
+  &__form {
+    @include flex-column;
+    padding: 0 48px;
+    gap: 24px;
+  }
+  &__title {
+    @include sh1;
+    align-self: center;
+    margin-bottom: 48px;
+  }
+  &__form-item {
+    @include flex-column;
+  }
+
+  &__label {
+    @include b2;
+  }
+  &__input {
+    @include input;
+    resize: none;
+  }
+  &__submit {
+    @include button-text;
+    background-color: $orange;
+    margin: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.success-modal {
+  height: 100%;
+  @include flex-column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+
+  &__title {
+    @include sh1;
+  }
+
+  &__img {
+    width: 134px;
+    margin-top: 32px;
+  }
+
+  &__text {
+    @include b2;
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  &__submit {
+    @include button-text;
+    background-color: $orange;
+    margin-top: 48px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }

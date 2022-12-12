@@ -13,8 +13,21 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
+  width: 688px;
+  height: 660px;
   background-color: white;
-  padding: 20px;
+  padding: 24px;
+  border-radius: 6px;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  // border: 2px solid red;
+  height: 100%;
+
+  &__close {
+    width: 24px;
+    margin-left: auto;
+  }
 }

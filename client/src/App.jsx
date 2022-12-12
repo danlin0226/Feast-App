@@ -50,7 +50,10 @@ function App() {
       <Routes>
         <Route path="/" element={<ExplorePage />} />
         <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/event-details/:id" element={<PostDetailsPage />} />
+        <Route
+          path="/event-details/:id"
+          element={<PostDetailsPage token={user.accessToken} />}
+        />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn signIn={signIn} />} />
         <Route path="/bio" element={<BioPage userBio={userBio} />} />

@@ -1,6 +1,6 @@
 const { update } = require("./postController");
 
-const knex = require("knex")(require("../knexfile"));
+const knex = require("knex")(require("../knexfile.js"));
 
 const getBio = (req, res) => {
   knex("users")
