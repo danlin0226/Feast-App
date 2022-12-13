@@ -17,7 +17,6 @@ exports.up = function (knex) {
       .onDelete("CASCADE");
     table.text("prompt1").notNullable();
     table.text("prompt2").notNullable();
-    table.text("prompt3").notNullable();
     table.string("status").notNullable();
   });
 };

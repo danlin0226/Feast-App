@@ -28,7 +28,8 @@
   }
   &__tag-cont {
     @include flex-row;
-    padding: 0 48px;
+    padding-left: 48px;
+    padding-right: 48px;
     gap: 16px;
     margin-top: 32px;
   }
@@ -38,6 +39,15 @@
     padding: 10px 30px;
     color: $white;
     border-radius: 100px;
+  }
+
+  &__edit {
+    @include flex-row;
+    margin-left: auto;
+
+    color: $orange;
+    align-items: center;
+    gap: 8px;
   }
   &__bottom-cont {
     @include flex-row;
@@ -115,6 +125,10 @@
     @include b2;
     text-align: center;
     margin-top: 12px;
+
+    &--left {
+      text-align: left;
+    }
   }
   &__attending-cont {
     // border: 2px solid red;
@@ -172,6 +186,7 @@
     margin: auto;
     padding-left: 32px;
     padding-right: 32px;
+    margin-top: 32px;
   }
 }
 
@@ -203,5 +218,107 @@
     margin-top: 48px;
     padding-left: 32px;
     padding-right: 32px;
+  }
+}
+
+.manage-modal {
+  // border: 2px solid red;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__title {
+    @include sh1;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  &__bottomBar {
+    @include flex-row;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    height: 120px;
+    border-top: 1px solid #d9d9d9;
+    background-color: white;
+    gap: 24px;
+  }
+  &__submit {
+    @include button-text;
+    background-color: $orange;
+    height: 56px;
+    width: 246px;
+    border: none;
+    &--white {
+      background-color: white;
+      border: 1px solid $orange;
+      color: $orange;
+    }
+  }
+}
+
+.modal-bio {
+  @include flex-column;
+  align-items: center;
+  &__middle-cont {
+    @include flex-column;
+    align-items: center;
+  }
+
+  &__name {
+    @include sh2;
+    margin-bottom: 24px;
+  }
+
+  &__stats-cont {
+    @include flex-row;
+    justify-content: center;
+    gap: 40px;
+  }
+  &__stats {
+    @include flex-row;
+    @include b2;
+    font-weight: 400;
+    gap: 12px;
+    @include flex-row;
+  }
+  &__about {
+    @include flex-row;
+    @include b2;
+    font-weight: 400;
+    margin-top: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    padding: 0 80px;
+  }
+
+  &__prompt {
+    padding: 0 64px;
+    @include flex-column;
+    width: 100%;
+    gap: 12px;
+    margin-bottom: 32px;
+    background-color: white;
+  }
+
+  &__prompt-title {
+    @include b2;
+    font-weight: 600;
+  }
+
+  &__prompt-text {
+    @include b2;
+    font-weight: 400;
+  }
+
+  &__socials {
+    @include flex-row;
+    gap: 16px;
+    margin-bottom: 80px;
   }
 }

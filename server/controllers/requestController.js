@@ -28,7 +28,21 @@ const sendRequest = (req, res) => {
 
 const getRequests = (req, res) => {
   knex("requests")
-    .select("requests.*", "users.avatar AS user_avatar")
+    .select(
+      "requests.*",
+      "users.name",
+      "users.age",
+      "users.gender",
+      "users.avatar",
+      "users.city",
+      "users.fb",
+      "users.ig",
+      "users.tt",
+      "users.about",
+      "users.prompt1 as user_prompt1",
+      "users.prompt2 as user_prompt2",
+      "users.prompt3 as user_prompt3"
+    )
     .join("users", "requests.user_id", "users.id")
     .where({ "requests.listing_id": req.params.id })
     .then((data) => {

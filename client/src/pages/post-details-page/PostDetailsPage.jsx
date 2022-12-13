@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "./PostDetailsPage.scss";
 
@@ -9,33 +10,50 @@ import chevron from "../../assets/icons/chevron.png";
 import pin from "../../assets/icons/map-pin-teal.svg";
 import calendar from "../../assets/icons/calendar.svg";
 import map from "../../assets/maps-placeholder.png";
+import edit from "../../assets/icons/edit.svg";
 import success from "../../assets/success.png";
+import gender from "../../assets/icons/bigender.svg";
+import cake from "../../assets/icons/cake.svg";
+import fb from "../../assets/icons/fb-orange.svg";
+import ig from "../../assets/icons/ig-orange.svg";
 
 import Avatar from "../../components/avatar/Avatar";
-import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../components/modal/Modal";
+import BioPage from "../../pages/bio-page/BioPage";
 
 const PostDetailsPage = ({ token, editable }) => {
-  console.log("editable?", editable);
   const navigate = useNavigate();
   const params = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isManageAttendee, setIsManageAttendee] = useState(false);
   const [postData, setPostData] = useState({});
   const [requests, setRequests] = useState([]);
+  const [selectedAttendee, setSelectedAttendee] = useState({});
 
-  const activeRequests = requests.filter(
+  console.log("request data", requests);
+
+  const acceptedRequests = requests.filter(
     (request) => request.status === "true"
   );
+
+  const spots = acceptedRequests.length;
 
   const pendingRequests = requests.filter(
     (request) => request.status === "false"
   );
-  console.log("activeRequests", activeRequests);
 
-  const m = () => {
-    setIsOpen(!isOpen);
+  const rejectedRequests = requests.filter(
+    (request) => request.status === "rejected"
+  );
+
+  const handleSelectAttendee = (id) => {
+    const singleRequest = requests.filter((request) => {
+      return request.id === id;
+    });
+    setSelectedAttendee(singleRequest[0]);
+    setIsManageAttendee(true);
   };
 
   useEffect(() => {
@@ -120,6 +138,12 @@ const PostDetailsPage = ({ token, editable }) => {
         <div className="details__tag-cont">
           <div className="details__tag">Mediterranean</div>
           <div className="details__tag">Brunch</div>
+          {editable && (
+            <div className="details__edit">
+              <img className="details__icon" src={edit} alt="" />
+              Edit Event
+            </div>
+          )}
         </div>
       </div>
       <div className="details__bottom-cont">
@@ -132,8 +156,12 @@ const PostDetailsPage = ({ token, editable }) => {
           </h2>
 
           <div className="details__host">
-            Hosted By: <Avatar avatar={postData.user_avatar} modal={m} />
-            <p className="details__host-text">{postData.user_name}</p>
+            Hosted By: <Avatar avatar={postData.user_avatar} />
+            {editable ? (
+              <p className="details__host-text">You</p>
+            ) : (
+              <p className="details__host-text">{postData.user_name}</p>
+            )}
           </div>
 
           <div className="details__info-card-cont">
@@ -152,28 +180,64 @@ const PostDetailsPage = ({ token, editable }) => {
           <p className="details__about-text">{postData.about}</p>
         </div>
         <div className="details__right-cont">
-          <p
-            className="details__sign-up"
-            onClick={(e) => {
-              setIsOpen(true);
-            }}
-            href=""
-          >
-            Sign Up
+          {editable ? (
+            <h2 className="details__manage">Manage attendees</h2>
+          ) : (
+            <p
+              className="details__sign-up"
+              onClick={(e) => {
+                setIsOpen(true);
+              }}
+              href=""
+            >
+              Sign Up
+            </p>
+          )}
+          <p className={`details__spots ${editable && "details__spots--left"}`}>
+            {`${spots} / ${postData.spots} spots available`}
           </p>
-          <p className="details__spots">2/6 spots available</p>
           <div className="details__attending-cont">
             <p className="details__attending-label">Attending</p>
             <div className="details__attending-avatars">
-              {activeRequests.map((activeRequest) => {
+              {acceptedRequests.map((activeRequest) => {
                 return (
                   <Avatar
                     key={activeRequest.id}
-                    avatar={activeRequest.user_avatar}
+                    avatar={activeRequest.avatar}
                   />
                 );
               })}
             </div>
+            {editable && (
+              <>
+                <p className="details__attending-label">Pending</p>
+                <div className="details__attending-avatars">
+                  {pendingRequests.map((pendingRequest) => {
+                    return (
+                      <Avatar
+                        key={pendingRequest.id}
+                        id={pendingRequest.id}
+                        avatar={pendingRequest.avatar}
+                        handleSelectAttendee={handleSelectAttendee}
+                      />
+                    );
+                  })}
+                </div>
+                <p className="details__attending-label">Rejected</p>
+                <div className="details__attending-avatars">
+                  {rejectedRequests.map((rejectedRequest) => {
+                    return (
+                      <Avatar
+                        key={rejectedRequest.id}
+                        id={rejectedRequest.id}
+                        avatar={rejectedRequest.avatar}
+                        handleSelectAttendee={handleSelectAttendee}
+                      />
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -211,17 +275,6 @@ const PostDetailsPage = ({ token, editable }) => {
                   rows="3"
                 />
               </div>
-              <div className="request-modal__form-item">
-                <label htmlFor="prompt3" className="request-modal__label">
-                  Why do you want to come to this event
-                </label>
-                <textarea
-                  className="request-modal__input"
-                  rows="3"
-                  name="prompt3"
-                  id="prompt3"
-                />
-              </div>
               <button className="request-modal__submit">Submit Request</button>
             </form>
           </div>
@@ -242,6 +295,81 @@ const PostDetailsPage = ({ token, editable }) => {
             >
               Go to My Events
             </button>
+          </div>
+        </Modal>
+      )}
+      {isManageAttendee && (
+        <Modal setIsOpen={setIsManageAttendee} largeModal={true}>
+          <div className="manage-modal">
+            <h1 className="manage-modal__title">Pending Request</h1>
+            <div className="modal-bio">
+              <div className="modal-bio__middle-cont">
+                <Avatar avatar={selectedAttendee.avatar} medium={true} />
+                <p className="modal-bio__name">{selectedAttendee.name}</p>
+                <div className="modal-bio__stats-cont">
+                  <p className="modal-bio__stats">
+                    <img src={gender} alt="" />
+                    {selectedAttendee.gender}
+                  </p>
+                  <p className="modal-bio__stats">
+                    <img src={cake} alt="" />
+                    {`${selectedAttendee.age} years old`}
+                  </p>
+                </div>
+                <p className="modal-bio__about">{selectedAttendee.about} </p>
+                <div className="modal-bio__prompt">
+                  <h4 className="modal-bio__prompt-title">
+                    The best thing I ever ate...
+                  </h4>
+                  <p className="modal-bio__prompt-text">
+                    {selectedAttendee.prompt1}
+                  </p>
+                </div>
+                <div className="modal-bio__prompt">
+                  <h4 className="modal-bio__prompt-title">
+                    The best thing I ever ate...
+                  </h4>
+                  <p className="modal-bio__prompt-text">
+                    {selectedAttendee.prompt2}
+                  </p>
+                </div>
+                <h1 className="modal-bio__name">Full Bio</h1>
+                <div className="modal-bio__prompt">
+                  <h4 className="modal-bio__prompt-title">
+                    The best thing I ever ate...
+                  </h4>
+                  <p className="modal-bio__prompt-text">
+                    {selectedAttendee.user_prompt1}
+                  </p>
+                </div>
+                <div className="modal-bio__prompt">
+                  <h4 className="modal-bio__prompt-title">
+                    If I were to choose my last meal, it would be...
+                  </h4>
+                  <p className="modal-bio__prompt-text">
+                    {selectedAttendee.user_prompt2}
+                  </p>
+                </div>
+                <div className="modal-bio__prompt">
+                  <h4 className="modal-bio__prompt-title">
+                    My next travel destination will be...
+                  </h4>
+                  <p className="modal-bio__prompt-text">
+                    {selectedAttendee.user_prompt3}
+                  </p>
+                </div>
+                <div className="modal-bio__socials">
+                  <img src={fb} alt="" />
+                  <img src={ig} alt="" />
+                </div>
+              </div>
+            </div>
+            <div className="manage-modal__bottomBar">
+              <button className="manage-modal__submit manage-modal__submit--white">
+                Reject
+              </button>
+              <button className="manage-modal__submit">Accept</button>
+            </div>
           </div>
         </Modal>
       )}
