@@ -85,11 +85,16 @@ const PostDetailsPage = ({ token, editable }) => {
           console.error(err);
         });
     });
-  }, []);
+  }, [isManageAttendee]);
 
   const submitRequestHandler = (e) => {
     e.preventDefault();
-
+    console.log({
+      listing_id: params.id,
+      prompt1: e.target.prompt1.value,
+      prompt2: e.target.prompt2.value,
+      status: "false",
+    });
     axios
       .post(
         "http://localhost:8080/requests",
@@ -97,7 +102,6 @@ const PostDetailsPage = ({ token, editable }) => {
           listing_id: params.id,
           prompt1: e.target.prompt1.value,
           prompt2: e.target.prompt2.value,
-          prompt3: e.target.prompt3.value,
           status: "false",
         },
         {
@@ -115,6 +119,25 @@ const PostDetailsPage = ({ token, editable }) => {
   const submittedRequestHandler = (e) => {
     e.preventDefault();
     navigate("/explore");
+  };
+
+  const acceptRequestHandler = (e) => {
+    console.log(token);
+    axios
+      .patch(
+        `http://localhost:8080/requests/${selectedAttendee.id}`,
+        {
+          status: "true",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setIsManageAttendee(false);
+      });
   };
 
   return (
@@ -372,7 +395,14 @@ const PostDetailsPage = ({ token, editable }) => {
               >
                 Reject
               </button>
-              <button className="manage-modal__submit">Accept</button>
+              <button
+                onClick={() => {
+                  acceptRequestHandler();
+                }}
+                className="manage-modal__submit"
+              >
+                Accept
+              </button>
             </div>
           </div>
         </Modal>

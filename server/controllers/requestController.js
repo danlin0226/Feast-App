@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const knex = require("knex")(require("../knexfile"));
 
 const sendRequest = (req, res) => {
-  if (!req.body.prompt1 || !req.body.prompt2 || !req.body.prompt3) {
+  if (!req.body.prompt1 || !req.body.prompt2) {
     return res
       .status(400)
       .send("Please provide responses for all three prompts!");
@@ -40,8 +40,7 @@ const getRequests = (req, res) => {
       "users.tt",
       "users.about",
       "users.prompt1 as user_prompt1",
-      "users.prompt2 as user_prompt2",
-      "users.prompt3 as user_prompt3"
+      "users.prompt2 as user_prompt2"
     )
     .join("users", "requests.user_id", "users.id")
     .where({ "requests.listing_id": req.params.id })
