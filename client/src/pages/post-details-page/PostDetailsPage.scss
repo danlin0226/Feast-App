@@ -136,11 +136,12 @@
     margin-top: 36px;
     border-radius: 6px;
     background-color: $white;
-    height: 380px;
+    height: 400px;
     padding: 16px 24px;
   }
 
   &__attending-label {
+    margin-top: 16px;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;

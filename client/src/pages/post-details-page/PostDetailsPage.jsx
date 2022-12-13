@@ -19,7 +19,6 @@ import ig from "../../assets/icons/ig-orange.svg";
 
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/modal/Modal";
-import BioPage from "../../pages/bio-page/BioPage";
 
 const PostDetailsPage = ({ token, editable }) => {
   const navigate = useNavigate();
@@ -31,8 +30,6 @@ const PostDetailsPage = ({ token, editable }) => {
   const [postData, setPostData] = useState({});
   const [requests, setRequests] = useState([]);
   const [selectedAttendee, setSelectedAttendee] = useState({});
-
-  console.log("request data", requests);
 
   const acceptedRequests = requests.filter(
     (request) => request.status === "true"
@@ -68,7 +65,6 @@ const PostDetailsPage = ({ token, editable }) => {
         })
         .then((res) => {
           setPostData(res.data);
-          console.log(res.data);
         });
     });
   }, [params.id]);
@@ -86,7 +82,7 @@ const PostDetailsPage = ({ token, editable }) => {
           setRequests(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     });
   }, []);
@@ -194,7 +190,7 @@ const PostDetailsPage = ({ token, editable }) => {
             </p>
           )}
           <p className={`details__spots ${editable && "details__spots--left"}`}>
-            {`${spots} / ${postData.spots} spots available`}
+            {`${postData.spots - spots} / ${postData.spots} spots available`}
           </p>
           <div className="details__attending-cont">
             <p className="details__attending-label">Attending</p>
@@ -305,7 +301,10 @@ const PostDetailsPage = ({ token, editable }) => {
             <div className="modal-bio">
               <div className="modal-bio__middle-cont">
                 <Avatar avatar={selectedAttendee.avatar} medium={true} />
-                <p className="modal-bio__name">{selectedAttendee.name}</p>
+                <p className="modal-bio__name">
+                  {selectedAttendee.name}
+                  {selectedAttendee.id}
+                </p>
                 <div className="modal-bio__stats-cont">
                   <p className="modal-bio__stats">
                     <img src={gender} alt="" />
@@ -365,7 +364,12 @@ const PostDetailsPage = ({ token, editable }) => {
               </div>
             </div>
             <div className="manage-modal__bottomBar">
-              <button className="manage-modal__submit manage-modal__submit--white">
+              <button
+                onClick={() => {
+                  setIsManageAttendee(false);
+                }}
+                className="manage-modal__submit manage-modal__submit--white"
+              >
                 Reject
               </button>
               <button className="manage-modal__submit">Accept</button>

@@ -66,4 +66,20 @@ const getUserRequests = (req, res) => {
     });
 };
 
-module.exports = { sendRequest, getRequests, getUserRequests };
+const acceptReject = (req, res) => {
+  knex("requests")
+    .where({ id: req.params.id })
+    .update({ ...req.body, status: req.body.status })
+    .then(() => {
+      knex("requests")
+        .where({ id: req.params.id })
+        .then((data) => {
+          res.status(201).json(data[0]);
+        });
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+};
+
+module.exports = { sendRequest, getRequests, getUserRequests, acceptReject };
