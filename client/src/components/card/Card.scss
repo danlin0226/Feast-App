@@ -2,20 +2,29 @@
 
 .card {
   width: 324px;
+  height: 475px;
   border-radius: 6px;
   //   border: 2px solid red;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 4px 20px 1px rgba(52, 52, 52, 0.1);
+  position: relative;
 
   &__img {
     width: 100%;
     aspect-ratio: 16/9;
-
     object-fit: cover;
     object-position: 0 50%;
-
     border-radius: 6px 6px 0 0;
+  }
+  &__close {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 20px 1px rgba(52, 52, 52, 0.1);
+    border-radius: 50%;
+    padding: 1px;
+    right: 10px;
+    top: 10px;
   }
 
   &__text-cont {

@@ -59,6 +59,10 @@ function App() {
           path="/event-details/:id"
           element={<PostDetailsPage token={user.accessToken} />}
         />
+        <Route
+          path="/event-details/hosting/:id"
+          element={<PostDetailsPage editable={true} />}
+        />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn signIn={signIn} />} />
         <Route path="/bio" element={<BioPage userBio={userBio} />} />

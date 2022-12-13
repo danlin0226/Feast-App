@@ -1,10 +1,10 @@
-import React from "react";
-import CardListings from "../../components/card-listings/CardListings";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
-import axios from "axios";
-import { useState } from "react";
+import "./MyEventsPage.scss";
+
+import CardListings from "../../components/card-listings/CardListings";
 
 const MyEventsPage = ({ uid }) => {
   const [userRequestPosts, setUserRequestPosts] = useState([]);
@@ -36,7 +36,9 @@ const MyEventsPage = ({ uid }) => {
             setAttending(false);
             setHosting(true);
           }}
-          className="myEvents__nav-item"
+          className={`myEvents__nav-item ${
+            hosting && "myEvents__nav-item--underline"
+          }`}
         >
           Hosting
         </div>
@@ -45,17 +47,27 @@ const MyEventsPage = ({ uid }) => {
             setAttending(true);
             setHosting(false);
           }}
-          className="myEvents__nav-item"
+          className={`myEvents__nav-item ${
+            attending && "myEvents__nav-item--underline"
+          }`}
         >
           Attending
         </div>
       </div>
-      {hosting && <CardListings isHosting={true} uid={uid} editable={true} />}
+      {hosting && (
+        <CardListings
+          isHosting={true}
+          uid={uid}
+          editable={true}
+          deletable={true}
+        />
+      )}
       {attending && (
         <CardListings
           isHosting={false}
           uid={uid}
           userRequestPosts={userRequestPosts}
+          deletable={true}
         />
       )}
     </section>

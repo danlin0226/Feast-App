@@ -177,7 +177,7 @@ const PostDetailsPage = ({ token, editable }) => {
           </div>
         </div>
       </div>
-      g
+
       {isOpen && (
         <Modal setIsOpen={setIsOpen}>
           <div className="request-modal">

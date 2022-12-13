@@ -4,11 +4,13 @@ import "./Modal.scss";
 
 import close from "../../assets/icons/close.png";
 
-function Modal({ children, setIsOpen }) {
+function Modal({ children, setIsOpen, smallModal }) {
   return (
     <>
       <div className="modal-overlay">
-        <div className="modal-content">
+        <div
+          className={`modal-content ${smallModal && "modal-content--small"}`}
+        >
           <div className="modal">
             <img
               className="modal__close"

@@ -1,23 +1,33 @@
 import React from "react";
 import pin from "../../assets/icons/map-pin.svg";
 import userCircle from "../../assets/icons/user-circle.svg";
+import close from "../../assets/icons/close.png";
 
 import { Link } from "react-router-dom";
 
 import "./Card.scss";
 
-const Card = ({ data, editable }) => {
-  console.log(editable);
+const Card = ({ data, editable, deletable, selectPostHandler }) => {
   return (
     <Link
       to={
         editable
-          ? `/event-details/edit/${data.id}`
+          ? `/event-details/hosting/${data.id}`
           : `/event-details/${data.id}`
       }
     >
       <article className="card">
         <img className="card__img" src={data.image} alt="" />
+        {deletable && (
+          <img
+            className="card__close"
+            src={close}
+            alt=""
+            onClick={(e) => {
+              selectPostHandler(e, data.id);
+            }}
+          />
+        )}
         <div className="card__text-cont">
           <h2 className="card__header">{`${data.name} @ ${data.location}`}</h2>
           <div className="card__info-cont">

@@ -4,11 +4,13 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import chevron from "../../assets/icons/chevron.png";
+import success from "../../assets/success.png";
 
 import { Uploader } from "uploader"; // Installed by "react-uploader".
 import { UploadDropzone } from "react-uploader";
 
 import FormInput from "../../components/formInput/FormInput";
+import Modal from "../../components/modal/Modal";
 import { useEffect } from "react";
 
 // Initialize once (at the start of your app).
@@ -69,6 +71,8 @@ const CreateEventPage = ({ token }) => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const [eventCreated, setEventCreated] = useState(false);
 
   const inputs = [
     {
@@ -180,12 +184,6 @@ const CreateEventPage = ({ token }) => {
     setIsSubmit(true);
   };
 
-  //   useEffect(() => {
-  //     if (Object.keys(errors).length === 0 && isSubmit) {
-  //       console.log(values);
-  //     }
-  //   }, [errors]);
-
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
@@ -250,8 +248,34 @@ const CreateEventPage = ({ token }) => {
             />
           );
         })}
-        <button className="form__button">Submit</button>
+        <button
+          onClick={() => {
+            setEventCreated(true);
+          }}
+          className="form__button"
+        >
+          Submit
+        </button>
       </form>
+      {eventCreated && (
+        <Modal setIsOpen={setEventCreated}>
+          <div className="success-modal">
+            <h1 className="success-modal__title">Event Created!</h1>
+            <img className="success-modal__img" src={success} alt="" />
+            <p className="success-modal__text">
+              Hang tight while other foodies request to join your event!
+            </p>
+            <button
+              onClick={() => {
+                navigate("/explore");
+              }}
+              className="success-modal__submit"
+            >
+              Go to My Events
+            </button>
+          </div>
+        </Modal>
+      )}
     </section>
   );
 };
