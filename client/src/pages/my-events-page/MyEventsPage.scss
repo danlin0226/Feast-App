@@ -11,6 +11,10 @@
   }
 
   &__nav-item {
+    cursor: pointer;
+    &:hover {
+      border-bottom: 2px solid $orange;
+    }
     &--underline {
       border-bottom: 2px solid $orange;
     }

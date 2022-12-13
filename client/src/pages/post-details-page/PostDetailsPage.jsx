@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 import "./PostDetailsPage.scss";
 
@@ -85,7 +85,7 @@ const PostDetailsPage = ({ token, editable }) => {
           console.error(err);
         });
     });
-  }, [isManageAttendee]);
+  }, [isManageAttendee, params.id]);
 
   const submitRequestHandler = (e) => {
     e.preventDefault();
@@ -121,13 +121,30 @@ const PostDetailsPage = ({ token, editable }) => {
     navigate("/explore");
   };
 
-  const acceptRequestHandler = (e) => {
-    console.log(token);
+  const acceptRequestHandler = () => {
     axios
       .patch(
         `http://localhost:8080/requests/${selectedAttendee.id}`,
         {
           status: "true",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setIsManageAttendee(false);
+      });
+  };
+
+  const rejectRequestHandler = () => {
+    axios
+      .patch(
+        `http://localhost:8080/requests/${selectedAttendee.id}`,
+        {
+          status: "rejected",
         },
         {
           headers: {
@@ -158,10 +175,10 @@ const PostDetailsPage = ({ token, editable }) => {
           <div className="details__tag">Mediterranean</div>
           <div className="details__tag">Brunch</div>
           {editable && (
-            <div className="details__edit">
+            <Link to={`/edit-event/${postData.id}`} className="details__edit">
               <img className="details__icon" src={edit} alt="" />
               Edit Event
-            </div>
+            </Link>
           )}
         </div>
       </div>
@@ -389,7 +406,7 @@ const PostDetailsPage = ({ token, editable }) => {
             <div className="manage-modal__bottomBar">
               <button
                 onClick={() => {
-                  setIsManageAttendee(false);
+                  rejectRequestHandler();
                 }}
                 className="manage-modal__submit manage-modal__submit--white"
               >

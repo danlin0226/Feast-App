@@ -1,7 +1,7 @@
 import React from "react";
 import "./BioPage.scss";
 
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import chevron from "../../assets/icons/chevron.png";
 import gender from "../../assets/icons/bigender.svg";
 import cake from "../../assets/icons/cake.svg";

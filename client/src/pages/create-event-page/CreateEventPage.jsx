@@ -13,6 +13,8 @@ import FormInput from "../../components/formInput/FormInput";
 import Modal from "../../components/modal/Modal";
 import { useEffect } from "react";
 
+import { convertDateLocalToString } from "../../utils/dateConversion";
+
 // Initialize once (at the start of your app).
 const uploader = Uploader({ apiKey: "free" });
 const myCustomLocale = {
@@ -56,9 +58,11 @@ const MyUploadedFiles = ({ files }) =>
     );
   });
 
-const CreateEventPage = ({ token }) => {
+const CreateEventPage = ({ token, edit, postToEdit }) => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
+  console.log("post", postToEdit);
+
   const [values, setValues] = useState({
     name: "",
     location: "",
@@ -69,9 +73,14 @@ const CreateEventPage = ({ token }) => {
     cuisine: "",
     meal: "",
   });
+
+  useEffect(() => {
+    if (edit) {
+      setValues(postToEdit);
+    }
+  }, [postToEdit, edit]);
   const [errors, setErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-
   const [eventCreated, setEventCreated] = useState(false);
 
   const inputs = [
@@ -86,56 +95,58 @@ const CreateEventPage = ({ token }) => {
       id: 2,
       name: "location",
       type: "text",
-      placeholder: "location",
-      label: "location",
+      placeholder: "Enter restaurant",
+      label: "Restaurant",
     },
     {
       id: 3,
       name: "time",
       type: "datetime-local",
       placeholder: "time",
-      label: "time",
+      label: "Date",
     },
     {
       id: 4,
       name: "address",
       type: "text",
-      placeholder: "address",
-      label: "address",
+      placeholder: "Enter address",
+      label: "Address",
     },
     {
       id: 6,
       name: "spots",
       type: "text",
       placeholder: "spots",
-      label: "spots",
+      label: "Spots Available",
       dropdown: "spots",
     },
     {
       id: 7,
       name: "cuisine",
       type: "text",
-      placeholder: "cuisine",
-      label: "cuisine",
+      placeholder: "Cuisine",
+      label: "Cuisine",
       dropdown: "cuisine",
     },
     {
       id: 8,
       name: "meal",
       type: "text",
-      placeholder: "meal",
-      label: "meal",
+      placeholder: "Type of Event",
+      label: "Type of Event",
       dropdown: "meal",
     },
     {
       id: 5,
       name: "about",
-      type: "text",
-      placeholder: "about",
-      label: "about",
+      type: "textarea",
+      placeholder: "Enter description",
+      label: "Event Description",
+      dropdown: "textarea",
     },
   ];
 
+  console.log(values);
   const submitHandler = (e) => {
     e.preventDefault();
     setErrors(validate(values));
@@ -169,7 +180,7 @@ const CreateEventPage = ({ token }) => {
         name: values.name,
         image: files[0].fileUrl,
         location: values.location,
-        time: values.time,
+        time: convertDateLocalToString(values.time),
         about: values.about,
         spots: values.spots,
         address: values.address,
@@ -229,6 +240,7 @@ const CreateEventPage = ({ token }) => {
         <img className="details__icon" src={chevron} alt="" />
         Back to Explore
       </p>
+      {edit && <h1 className="details__title">Edit Event</h1>}
       <div className="create-event__dropzone">
         {files.length ? (
           <MyUploadedFiles files={files} />
