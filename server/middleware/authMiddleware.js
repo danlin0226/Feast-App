@@ -14,7 +14,7 @@ const authMiddleware = async (request, response, next) => {
 
   try {
     decodedValue = await admin.auth().verifyIdToken(token);
-    // console.log("decoded value", decodedValue);
+    console.log("from middle ware", decodedValue);
     request.user = decodedValue;
     if (decodedValue) {
       return next();

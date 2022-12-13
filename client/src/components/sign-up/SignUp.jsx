@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 import {
   createUserWithEmailAndPassword,
@@ -16,17 +17,9 @@ const SignUp = () => {
   const [registerPassword, setRegisterPassword] = useState("");
 
   const [user, setUser] = useState({});
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      window.localStorage.setItem("auth", true);
-    });
-  }, []);
-
   const register = async (e) => {
     e.preventDefault();
+
     try {
       await createUserWithEmailAndPassword(
         auth,
@@ -35,7 +28,17 @@ const SignUp = () => {
       );
 
       const token = await auth.currentUser.getIdToken();
-      console.log(token);
+      axios
+        .post(
+          "http://localhost:8080/auth/signup",
+          {},
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        )
+        .then((res) => {
+          console.log("res", res.data);
+        });
     } catch (error) {
       console.log(error.message);
     }
@@ -61,7 +64,7 @@ const SignUp = () => {
         <label htmlFor="password">
           password:
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             ref={passwordRef}

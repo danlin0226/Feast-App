@@ -6,9 +6,8 @@ import Avatar from "../../components/avatar/Avatar";
 
 import logo from "../../assets/logo/feast-logo.svg";
 import plus from "../../assets/icons/circle-plus.svg";
-import avatar from "../../assets/profile-pics/steph.jpg";
 
-const Header = () => {
+const Header = ({ userBio, signedIn }) => {
   const activeClassName = "active";
   return (
     <div className="header">
@@ -29,7 +28,7 @@ const Header = () => {
         <h4 className="header__link">
           {" "}
           <NavLink
-            to="/post-details/2"
+            to="/my-events"
             className={({ isActive }) =>
               isActive ? activeClassName : undefined
             }
@@ -39,11 +38,15 @@ const Header = () => {
         </h4>
       </div>
       <div className="header__right">
-        <div className="header__create-event">
-          <img className="header__create-icon" src={plus} alt="" />
-          <p className="header__create-text">Create Event</p>
-        </div>
-        <Avatar />
+        <Link to="/create-event">
+          <div className="header__create-event">
+            <img className="header__create-icon" src={plus} alt="" />
+            <p className="header__create-text">Create Event</p>
+          </div>
+        </Link>
+        <Link to={signedIn ? "/bio" : "register"}>
+          <Avatar avatar={userBio.avatar} />
+        </Link>
       </div>
     </div>
   );

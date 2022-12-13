@@ -2,16 +2,21 @@ import React from "react";
 
 import "./Avatar.scss";
 
-import avatar from "../../assets/profile-pics/steph.jpg";
-
-const Avatar = () => {
+const Avatar = ({ id, avatar, large, medium, handleSelectAttendee }) => {
   return (
-    <div className="avatar-cont">
+    <div
+      className={`avatar-cont ${large && "avatar-cont--large"} ${
+        medium && "avatar-cont--medium"
+      }`}
+      onClick={() => {
+        handleSelectAttendee(id);
+      }}
+    >
       <img
         className="avatar"
         src={avatar}
         onError={(i) => (i.target.style.display = "none")}
-        alt="avatar"
+        alt=""
       />
     </div>
   );

@@ -15,8 +15,8 @@ exports.up = function (knex) {
       .references("users.id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
-    table.string("prompt1").notNullable();
-    table.string("prompt2").notNullable();
+    table.text("prompt1").notNullable();
+    table.text("prompt2").notNullable();
     table.string("status").notNullable();
   });
 };

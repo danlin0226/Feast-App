@@ -7,13 +7,14 @@ exports.up = function (knex) {
     table.string("id").primary();
     table.string("email").notNullable();
     table.string("name");
+    table.text("about");
     table.string("avatar");
     table.string("age");
     table.string("gender");
     table.string("city");
-    table.string("prompt1");
-    table.string("prompt2");
-    table.string("prompt3");
+    table.text("prompt1");
+    table.text("prompt2");
+    table.text("prompt3");
     table.string("fb");
     table.string("ig");
     table.string("tt");

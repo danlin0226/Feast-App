@@ -1,0 +1,64 @@
+@use "../../main.scss" as *;
+
+.bio {
+  @include flex-column;
+  background-color: #f9f9f9;
+  align-items: center;
+  &__middle-cont {
+    @include flex-column;
+    align-items: center;
+    width: 840px;
+  }
+
+  &__name {
+    @include h2;
+    margin-bottom: 16px;
+  }
+
+  &__stats-cont {
+    @include flex-row;
+    justify-content: center;
+    gap: 40px;
+  }
+  &__stats {
+    @include flex-row;
+    @include b2;
+    font-weight: 400;
+    gap: 12px;
+    @include flex-row;
+  }
+  &__about {
+    @include flex-row;
+    @include b2;
+    font-weight: 400;
+    margin-top: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    padding: 0 80px;
+  }
+
+  &__prompt {
+    padding: 24px;
+    @include flex-column;
+    width: 100%;
+    gap: 16px;
+    margin-bottom: 24px;
+    background-color: white;
+  }
+
+  &__prompt-title {
+    @include b2;
+    font-weight: 600;
+  }
+
+  &__prompt-text {
+    @include b2;
+    font-weight: 400;
+  }
+
+  &__socials {
+    @include flex-row;
+    gap: 16px;
+    margin-bottom: 80px;
+  }
+}

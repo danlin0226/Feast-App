@@ -20,13 +20,8 @@ const LogIn = () => {
       if (!currentUser) {
         setUser(currentUser);
       }
-
       if (currentUser) {
         setUser(currentUser);
-        window.localStorage.setItem("auth", true);
-        // currentUser.getIdToken().then((token) => {
-        //   setToken(token);
-        // });
       }
     });
   }, []);
@@ -72,7 +67,7 @@ const LogIn = () => {
         <label htmlFor="password">
           password:
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
             onChange={(e) => {

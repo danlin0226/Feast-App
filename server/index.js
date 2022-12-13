@@ -9,6 +9,7 @@ const authMiddleware = require("./middleware/authMiddleware");
 const authRoutes = require("./routes/authRoutes");
 const bioRoutes = require("./routes/bioRoutes");
 const postRoutes = require("./routes/postRoutes");
+const requestRoutes = require("./routes/requestRoutes");
 
 // middlewares
 // app.use(logger);
@@ -27,16 +28,13 @@ app.get("/", (_req, res) => {
 
 app.use("/", authMiddleware);
 app.use("/posts", postRoutes);
+app.use("/requests", requestRoutes);
 app.use("/auth", authRoutes);
 app.use("/auth/bio", bioRoutes);
 
 app.use(express.static(path.join(__dirname, "public")));
 
 const PORT = process.env.PORT || 5500;
-
-// app.get("/", (_request, response) => {
-//   response.status(200).sendFile(path.join(__dirname, "public", "index.html"));
-// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT} 🚀`);

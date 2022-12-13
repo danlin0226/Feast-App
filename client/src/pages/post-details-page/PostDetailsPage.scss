@@ -2,7 +2,6 @@
 
 .details {
   @include flex-column;
-  background-color: #f9f9f9;
   align-items: center;
   justify-content: center;
 
@@ -14,7 +13,6 @@
   &__top-cont {
     max-width: 1440px;
     width: 100%;
-    // border: 2px solid red;
   }
 
   &__breadcrumb-text {
@@ -22,6 +20,7 @@
     @include flex-row;
     padding: 0 48px;
     margin-top: 32px;
+    cursor: pointer;
   }
 
   &__icon {
@@ -29,7 +28,8 @@
   }
   &__tag-cont {
     @include flex-row;
-    padding: 0 48px;
+    padding-left: 48px;
+    padding-right: 48px;
     gap: 16px;
     margin-top: 32px;
   }
@@ -40,13 +40,22 @@
     color: $white;
     border-radius: 100px;
   }
+
+  &__edit {
+    @include flex-row;
+    margin-left: auto;
+
+    color: $orange;
+    align-items: center;
+    gap: 8px;
+  }
   &__bottom-cont {
     @include flex-row;
     margin-top: 32px;
     max-width: 1440px;
   }
   &__left-cont {
-    // border: 2px solid red;
+    flex: 1;
     padding: 0 48px;
   }
   &__title {
@@ -102,7 +111,8 @@
   &__right-cont {
     padding: 0 48px;
     @include flex-column;
-    flex-basis: 45%;
+    flex: 0.31;
+    // width: 25%;
     // border: 2px solid red;
   }
 
@@ -110,12 +120,15 @@
     @include button-text;
     background-color: $orange;
     text-align: center;
-    padding: 10px;
   }
   &__spots {
     @include b2;
     text-align: center;
     margin-top: 12px;
+
+    &--left {
+      text-align: left;
+    }
   }
   &__attending-cont {
     // border: 2px solid red;
@@ -123,11 +136,12 @@
     margin-top: 36px;
     border-radius: 6px;
     background-color: $white;
-    height: 380px;
+    height: 400px;
     padding: 16px 24px;
   }
 
   &__attending-label {
+    margin-top: 16px;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
@@ -139,5 +153,173 @@
     @include flex-row;
     flex-wrap: wrap;
     gap: 16px;
+  }
+}
+
+.request-modal {
+  @include flex-column;
+  justify-content: center;
+  height: 100%;
+  &__form {
+    @include flex-column;
+    padding: 0 48px;
+    gap: 24px;
+  }
+  &__title {
+    @include sh1;
+    align-self: center;
+    margin-bottom: 48px;
+  }
+  &__form-item {
+    @include flex-column;
+  }
+
+  &__label {
+    @include b2;
+  }
+  &__input {
+    @include input;
+    resize: none;
+  }
+  &__submit {
+    @include button-text;
+    background-color: $orange;
+    margin: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: 32px;
+  }
+}
+
+.success-modal {
+  height: 100%;
+  @include flex-column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+
+  &__title {
+    @include sh1;
+  }
+
+  &__img {
+    width: 134px;
+    margin-top: 32px;
+  }
+
+  &__text {
+    @include b2;
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  &__submit {
+    @include button-text;
+    background-color: $orange;
+    margin-top: 48px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.manage-modal {
+  // border: 2px solid red;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__title {
+    @include sh1;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  &__bottomBar {
+    @include flex-row;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    height: 120px;
+    border-top: 1px solid #d9d9d9;
+    background-color: white;
+    gap: 24px;
+  }
+  &__submit {
+    @include button-text;
+    background-color: $orange;
+    height: 56px;
+    width: 246px;
+    border: none;
+    &--white {
+      background-color: white;
+      border: 1px solid $orange;
+      color: $orange;
+    }
+  }
+}
+
+.modal-bio {
+  @include flex-column;
+  align-items: center;
+  &__middle-cont {
+    @include flex-column;
+    align-items: center;
+  }
+
+  &__name {
+    @include sh2;
+    margin-bottom: 24px;
+  }
+
+  &__stats-cont {
+    @include flex-row;
+    justify-content: center;
+    gap: 40px;
+  }
+  &__stats {
+    @include flex-row;
+    @include b2;
+    font-weight: 400;
+    gap: 12px;
+    @include flex-row;
+  }
+  &__about {
+    @include flex-row;
+    @include b2;
+    font-weight: 400;
+    margin-top: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    padding: 0 80px;
+  }
+
+  &__prompt {
+    padding: 0 64px;
+    @include flex-column;
+    width: 100%;
+    gap: 12px;
+    margin-bottom: 32px;
+    background-color: white;
+  }
+
+  &__prompt-title {
+    @include b2;
+    font-weight: 600;
+  }
+
+  &__prompt-text {
+    @include b2;
+    font-weight: 400;
+  }
+
+  &__socials {
+    @include flex-row;
+    gap: 16px;
+    margin-bottom: 80px;
   }
 }
