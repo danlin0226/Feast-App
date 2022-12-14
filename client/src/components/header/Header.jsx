@@ -12,13 +12,15 @@ import { useState } from "react";
 
 const Header = ({ userBio, setUserBio, signedIn, setSignedIn }) => {
   console.log("signed IN", signedIn);
+  const navigate = useNavigate();
 
   const logOut = async (e) => {
     e.preventDefault();
     const status = await signOut(auth);
     console.log("status", status);
-    setUserBio({});
+    // setUserBio({});
     setSignedIn(false);
+    navigate("/explore");
     window.location.reload();
   };
 
