@@ -1,0 +1,48 @@
+@use "../../main.scss" as *;
+
+.auth {
+  width: 100%;
+  @include flex-column;
+  &__title {
+    @include h1;
+    margin-bottom: 16px;
+  }
+  &__subheader {
+    @include b1;
+    margin-bottom: 48px;
+  }
+
+  &__form {
+    @include flex-column;
+    gap: 24px;
+  }
+  &__label {
+    @include flex-column;
+    @include b2;
+
+    gap: 8px;
+    // border: 2px solid red;
+  }
+
+  &__input {
+    // @include flex-column;
+    // gap: 16px;
+    background-color: #f1f1f1;
+    border: none;
+    height: 53px;
+    border-radius: 6px;
+    padding: 13px 16px;
+  }
+
+  &__button {
+    @include button-text;
+    background-color: $orange;
+  }
+
+  &__subheader2 {
+    text-align: center;
+  }
+  &__create {
+    color: $teal;
+  }
+}

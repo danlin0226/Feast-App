@@ -10,8 +10,6 @@ import Header from "./components/header/Header";
 // import CardListings from "./components/card-listings/CardListings";
 import Footer from "./components/footer/Footer";
 
-import SignUp from "./components/sign-up/SignUp";
-import SignIn from "./components/sign-in/SignIn";
 import BioPage from "./pages/bio-page/BioPage";
 import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
 import { useEffect, useState } from "react";
@@ -19,26 +17,32 @@ import axios from "axios";
 import CreateEventPage from "./pages/create-event-page/CreateEventPage";
 import EditEventPage from "./pages/edit-event-page/EditEventPage";
 import MyEventsPage from "./pages/my-events-page/MyEventsPage";
+import SignInPage from "./pages/sign-in-page/SignInPage";
+import RegisterPage from "./pages/register-page/RegisterPage";
 
 function App() {
   const [signedIn, setSignedIn] = useState(false);
   const [user, setUser] = useState({});
   const [userBio, setUserBio] = useState({});
+  const [showNav, setShowNav] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      axios
-        .get("http://localhost:8080/auth/bio", {
-          headers: {
-            Authorization: `Bearer ${currentUser.accessToken}`,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setUserBio(res.data);
-          setSignedIn(true);
-        });
-      setUser(currentUser);
+      if (currentUser) {
+        axios
+          .get("http://localhost:8080/auth/bio", {
+            headers: {
+              Authorization: `Bearer ${currentUser.accessToken}`,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+            setUserBio(res.data);
+            setSignedIn(true);
+            setShowNav(true);
+          });
+        setUser(currentUser);
+      }
     });
   }, []);
 
@@ -48,7 +52,14 @@ function App() {
 
   return (
     <>
-      <Header userBio={userBio} signedIn={signedIn} />
+      {showNav && (
+        <Header
+          userBio={userBio}
+          setUserBio={setUserBio}
+          setSignedIn={setSignedIn}
+          signedIn={signedIn}
+        />
+      )}
       <Routes>
         <Route path="/" element={<ExplorePage />} />
         <Route path="/explore" element={<ExplorePage />} />
@@ -64,8 +75,17 @@ function App() {
           path="/event-details/hosting/:id"
           element={<PostDetailsPage editable={true} token={user.accessToken} />}
         />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn signIn={signIn} />} />
+        <Route
+          path="/register"
+          setShowNav={setShowNav}
+          element={<RegisterPage setShowNav={setShowNav} />}
+        />
+        <Route
+          path="/signin"
+          element={
+            <SignInPage setShowNav={setShowNav} setSignedIn={setSignedIn} />
+          }
+        />
         <Route path="/bio" element={<BioPage userBio={userBio} />} />
         <Route
           path="/create-event"
@@ -77,7 +97,7 @@ function App() {
         />
         <Route path="*" element={<Navigate to="/explore" />} />
       </Routes>
-      <Footer />
+      {showNav && <Footer />}
     </>
   );
 }
