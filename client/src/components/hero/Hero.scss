@@ -57,6 +57,7 @@
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     background: $teal url("../../assets/icons/search.png") no-repeat center;
+    cursor: pointer;
     &:active {
       background-color: #09615c;
     }

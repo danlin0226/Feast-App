@@ -28,4 +28,16 @@
       flex-basis: 23.6%;
     }
   }
+  &__dropdown {
+    width: 228px;
+    height: 47px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    color: #178f88;
+    @include dropdown(#e0eeed);
+    cursor: pointer;
+    &:hover {
+      @include dropdown(#c3dedc);
+    }
+  }
 }

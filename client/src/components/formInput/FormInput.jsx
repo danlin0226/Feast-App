@@ -16,7 +16,7 @@ const FormInput = ({
           {label}
         </label>
         <select
-          className="formInput__input"
+          className="formInput__input formInput__input--dropdown"
           id={inputProps.name}
           {...inputProps}
           onChange={onChange}
@@ -44,7 +44,7 @@ const FormInput = ({
           {label}
         </label>
         <select
-          className="formInput__input"
+          className="formInput__input formInput__input--dropdown"
           id={inputProps.name}
           {...inputProps}
           onChange={onChange}
@@ -75,7 +75,7 @@ const FormInput = ({
         </label>
         <select
           placeholder="Select an option"
-          className="formInput__input"
+          className="formInput__input formInput__input--dropdown"
           id={inputProps.name}
           {...inputProps}
           onChange={onChange}
