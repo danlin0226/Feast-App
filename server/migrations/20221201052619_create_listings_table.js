@@ -17,6 +17,8 @@ exports.up = function (knex) {
     table.text("about").notNullable();
     table.integer("spots").notNullable();
     table.string("address").notNullable();
+    table.string("meal").notNullable();
+    table.string("cuisine").notNullable();
     table.json("requests");
   });
 };

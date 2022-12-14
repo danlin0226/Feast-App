@@ -184,6 +184,8 @@ const CreateEventPage = ({ token, edit, postToEdit }) => {
         about: values.about,
         spots: values.spots,
         address: values.address,
+        cuisine: values.cuisine,
+        meal: values.meal,
       },
       {
         headers: { authorization: `Bearer ${token}` },

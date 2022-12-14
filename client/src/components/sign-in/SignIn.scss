@@ -21,12 +21,9 @@
     @include b2;
 
     gap: 8px;
-    // border: 2px solid red;
   }
 
   &__input {
-    // @include flex-column;
-    // gap: 16px;
     background-color: #f1f1f1;
     border: none;
     height: 53px;

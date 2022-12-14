@@ -18,6 +18,8 @@ exports.seed = async function (knex) {
       spots: 6,
       address: "604 Vancouver Street, Vancouver, British Columbia",
       requests: null,
+      cuisine: "Thai",
+      meal: "Dinner",
     },
     {
       id: "687f9a00-a7d7-4ad7-bfc2-7d8fc0da24fa",
@@ -32,6 +34,8 @@ exports.seed = async function (knex) {
       spots: 8,
       address: "85 Wood Street, Toronto, Ontario",
       requests: null,
+      cuisine: "American",
+      meal: "Dinner",
     },
     {
       id: "86704449-f3cb-41ff-bc1e-d4a7e0bdc56a",
@@ -45,6 +49,8 @@ exports.seed = async function (knex) {
       spots: 4,
       address: "124 Toronto Drive, Toronto, Ontario",
       requests: null,
+      cuisine: "Japanese",
+      meal: "Appies",
     },
     {
       id: "a238b5a2-1b1d-4273-89cf-0afc0bf5a511",
@@ -59,6 +65,8 @@ exports.seed = async function (knex) {
       spots: 2,
       address: "1602-60 Bremner Blvd, Toronto, Ontario",
       requests: null,
+      cuisine: "Canadian",
+      meal: "Dinner",
     },
     {
       id: "e270aece-e502-49ff-bb8a-029c7e4143c5",
@@ -73,6 +81,8 @@ exports.seed = async function (knex) {
       spots: 4,
       address: "123 Kumo Drive, Coquitlam, British Columbia",
       requests: null,
+      cuisine: "Canadian",
+      meal: "Brunch",
     },
   ]);
 };

@@ -172,8 +172,8 @@ const PostDetailsPage = ({ token, editable }) => {
         </p>
 
         <div className="details__tag-cont">
-          <div className="details__tag">Mediterranean</div>
-          <div className="details__tag">Brunch</div>
+          <div className="details__tag">{postData.cuisine}</div>
+          <div className="details__tag">{postData.meal}</div>
           {editable && (
             <Link to={`/edit-event/${postData.id}`} className="details__edit">
               <img className="details__icon" src={edit} alt="" />
