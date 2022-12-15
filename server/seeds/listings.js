@@ -17,9 +17,9 @@ exports.seed = async function (knex) {
       about: "This is text.  asflkjsalfkdj asdlfkjsa f",
       spots: 6,
       address: "604 Vancouver Street, Vancouver, British Columbia",
-      requests: null,
       cuisine: "Thai",
       meal: "Dinner",
+      geo: { lat: 49.283764, lng: -122.793205 },
     },
     {
       id: "687f9a00-a7d7-4ad7-bfc2-7d8fc0da24fa",
@@ -33,9 +33,9 @@ exports.seed = async function (knex) {
         "Casual Come join for a casual brunch at Cafe Medina! If people are free afterwards, we can shop around Robson or check out a cafe around downown after. I’ll be closing the RSVPs a week prior to the event so I can make reservations!",
       spots: 8,
       address: "85 Wood Street, Toronto, Ontario",
-      requests: null,
       cuisine: "American",
       meal: "Dinner",
+      geo: { lat: 49.283764, lng: -122.793205 },
     },
     {
       id: "86704449-f3cb-41ff-bc1e-d4a7e0bdc56a",
@@ -48,9 +48,9 @@ exports.seed = async function (knex) {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       spots: 4,
       address: "124 Toronto Drive, Toronto, Ontario",
-      requests: null,
       cuisine: "Japanese",
       meal: "Appies",
+      geo: { lat: 49.283764, lng: -122.793205 },
     },
     {
       id: "a238b5a2-1b1d-4273-89cf-0afc0bf5a511",
@@ -64,9 +64,9 @@ exports.seed = async function (knex) {
         "Casual Come join for a casual brunch at Cafe Medina! If people are free afterwards, we can shop around Robson or check out a cafe around downown after. I’ll be closing the RSVPs a week prior to the event so I can make reservations!",
       spots: 2,
       address: "1602-60 Bremner Blvd, Toronto, Ontario",
-      requests: null,
       cuisine: "Canadian",
       meal: "Dinner",
+      geo: { lat: 49.283764, lng: -122.793205 },
     },
     {
       id: "e270aece-e502-49ff-bb8a-029c7e4143c5",
@@ -80,9 +80,9 @@ exports.seed = async function (knex) {
         "Casual Come join for a casual brunch at Cafe Medina! If people are free afterwards, we can shop around Robson or check out a cafe around downown after. I’ll be closing the RSVPs a week prior to the event so I can make reservations!",
       spots: 4,
       address: "123 Kumo Drive, Coquitlam, British Columbia",
-      requests: null,
       cuisine: "Canadian",
       meal: "Brunch",
+      geo: { lat: 49.283764, lng: -122.793205 },
     },
   ]);
 };

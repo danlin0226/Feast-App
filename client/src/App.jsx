@@ -13,6 +13,7 @@ import Footer from "./components/footer/Footer";
 import BioPage from "./pages/bio-page/BioPage";
 import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
 import { useEffect, useState } from "react";
+import { useJsApiLoader } from "@react-google-maps/api";
 import axios from "axios";
 import CreateEventPage from "./pages/create-event-page/CreateEventPage";
 import EditEventPage from "./pages/edit-event-page/EditEventPage";
@@ -25,6 +26,12 @@ function App() {
   const [user, setUser] = useState({});
   const [userBio, setUserBio] = useState({});
   const [showNav, setShowNav] = useState(true);
+  const [libraries] = useState(["places"]);
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: libraries,
+  });
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -61,19 +68,27 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/" element={<ExplorePage />} />
-        <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/" element={<ExplorePage isLoaded={isLoaded} />} />
+        <Route path="/explore" element={<ExplorePage isLoaded={isLoaded} />} />
         <Route
           path="/my-events"
           element={<MyEventsPage token={user.accessToken} uid={user.uid} />}
         />
         <Route
           path="/event-details/:id"
-          element={<PostDetailsPage token={user.accessToken} />}
+          element={
+            <PostDetailsPage token={user.accessToken} isLoaded={isLoaded} />
+          }
         />
         <Route
           path="/event-details/hosting/:id"
-          element={<PostDetailsPage editable={true} token={user.accessToken} />}
+          element={
+            <PostDetailsPage
+              editable={true}
+              token={user.accessToken}
+              isLoaded={isLoaded}
+            />
+          }
         />
         <Route
           path="/register"
@@ -89,7 +104,9 @@ function App() {
         <Route path="/bio" element={<BioPage userBio={userBio} />} />
         <Route
           path="/create-event"
-          element={<CreateEventPage token={user.accessToken} />}
+          element={
+            <CreateEventPage token={user.accessToken} isLoaded={isLoaded} />
+          }
         />
         <Route
           path="/edit-event/:id"

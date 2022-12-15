@@ -19,7 +19,7 @@ exports.up = function (knex) {
     table.string("address").notNullable();
     table.string("meal").notNullable();
     table.string("cuisine").notNullable();
-    table.json("requests");
+    table.json("geo");
   });
 };
 

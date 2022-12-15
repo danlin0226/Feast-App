@@ -58,7 +58,7 @@ const MyUploadedFiles = ({ files }) =>
     );
   });
 
-const CreateEventPage = ({ token, edit, postToEdit }) => {
+const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   console.log("post", postToEdit);
@@ -72,6 +72,7 @@ const CreateEventPage = ({ token, edit, postToEdit }) => {
     spots: "",
     cuisine: "",
     meal: "",
+    geo: "",
   });
 
   useEffect(() => {
@@ -97,6 +98,7 @@ const CreateEventPage = ({ token, edit, postToEdit }) => {
       type: "text",
       placeholder: "Enter restaurant",
       label: "Restaurant",
+      dropdown: "address",
     },
     {
       id: 3,
@@ -111,6 +113,7 @@ const CreateEventPage = ({ token, edit, postToEdit }) => {
       type: "text",
       placeholder: "Enter address",
       label: "Address",
+      dropdown: "address",
     },
     {
       id: 6,
@@ -186,6 +189,7 @@ const CreateEventPage = ({ token, edit, postToEdit }) => {
         address: values.address,
         cuisine: values.cuisine,
         meal: values.meal,
+        geo: values.geo,
       },
       {
         headers: { authorization: `Bearer ${token}` },
@@ -228,7 +232,10 @@ const CreateEventPage = ({ token, edit, postToEdit }) => {
   };
 
   const onChangeHandler = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -258,7 +265,10 @@ const CreateEventPage = ({ token, edit, postToEdit }) => {
               key={input.id}
               {...input}
               value={values[input.name]}
+              setValues={setValues}
+              emptyValues={values}
               errorMessage={errors[input.name]}
+              isLoaded={isLoaded}
             />
           );
         })}

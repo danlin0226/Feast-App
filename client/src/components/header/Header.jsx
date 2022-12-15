@@ -8,7 +8,6 @@ import Avatar from "../../components/avatar/Avatar";
 
 import logo from "../../assets/logo/feast-logo.svg";
 import plus from "../../assets/icons/circle-plus.svg";
-import { useState } from "react";
 
 const Header = ({ userBio, setUserBio, signedIn, setSignedIn }) => {
   console.log("signed IN", signedIn);

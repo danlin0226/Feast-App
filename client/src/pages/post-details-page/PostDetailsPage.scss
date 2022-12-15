@@ -53,6 +53,7 @@
     @include flex-row;
     margin-top: 32px;
     max-width: 1440px;
+    width: 100%;
   }
   &__left-cont {
     flex: 1;

@@ -3,6 +3,7 @@ import axios from "axios";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 
 import "./PostDetailsPage.scss";
 
@@ -20,7 +21,7 @@ import ig from "../../assets/icons/ig-orange.svg";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/modal/Modal";
 
-const PostDetailsPage = ({ token, editable }) => {
+const PostDetailsPage = ({ token, editable, isLoaded }) => {
   const navigate = useNavigate();
   const params = useParams();
 
@@ -30,6 +31,7 @@ const PostDetailsPage = ({ token, editable }) => {
   const [postData, setPostData] = useState({});
   const [requests, setRequests] = useState([]);
   const [selectedAttendee, setSelectedAttendee] = useState({});
+  const [map, setMap] = useState();
 
   const acceptedRequests = requests.filter(
     (request) => request.status === "true"
@@ -157,6 +159,16 @@ const PostDetailsPage = ({ token, editable }) => {
       });
   };
 
+  if (!isLoaded) {
+    console.log(isLoaded);
+    return <div>Is loading</div>;
+  }
+
+  if (!postData.geo) {
+    console.log(isLoaded);
+    return <div>Is loading</div>;
+  }
+
   return (
     <section className="details">
       <img className="details__hero" src={postData.image} alt="" />
@@ -210,7 +222,20 @@ const PostDetailsPage = ({ token, editable }) => {
               {postData.address}
             </div>
           </div>
-
+          {/* displays google maps */}
+          <div className="details__map">
+            <GoogleMap
+              center={JSON.parse(postData.geo)}
+              zoom={15}
+              mapContainerStyle={{ width: "100%", height: "300px" }}
+              options={{ mapTypeControl: false, streetViewControl: false }}
+              onLoad={(map) => {
+                setMap(map);
+              }}
+            >
+              <MarkerF position={JSON.parse(postData.geo)} />
+            </GoogleMap>
+          </div>
           <img className="details__map" src={map} alt="" />
           <h4 className="details__about-title">About the Event</h4>
           <p className="details__about-text">{postData.about}</p>
