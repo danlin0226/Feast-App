@@ -241,7 +241,6 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
               <MarkerF position={JSON.parse(postData.geo)} />
             </GoogleMap>
           </div>
-          <img className="details__map" src={map} alt="map pin" />
           <h4 className="details__about-title">About the Event</h4>
           <p className="details__about-text">{postData.about}</p>
         </div>

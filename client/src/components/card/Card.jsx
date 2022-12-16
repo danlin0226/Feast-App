@@ -41,7 +41,7 @@ const Card = ({ data, editable, deletable, selectPostHandler }) => {
             </div>
             <div className="card__label">
               <img className="card__icon" src={userCircle} alt="circle icon" />
-              <p className="card__text">{`2/${data.spots} spots available`}</p>
+              <p className="card__text">{`${data.spots}/${data.spots} spots available`}</p>
             </div>
           </div>
         </div>

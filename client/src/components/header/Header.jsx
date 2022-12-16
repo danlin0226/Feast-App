@@ -61,7 +61,7 @@ const Header = ({ userBio, signedIn, setSignedIn }) => {
           </div>
         </Link>
         <div className="dropdown">
-          <Link to={signedIn ? "/bio" : "register"}>
+          <Link to={signedIn ? "/bio" : "/signin"}>
             <Avatar avatar={userBio.avatar} />
           </Link>
           <div className="dropdown-content">

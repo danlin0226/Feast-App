@@ -53,22 +53,6 @@ export const convertDateLocalToString = (dateString) => {
   minutes = minutes < 10 ? "0" + minutes : minutes;
 
   // Return the formatted date string
+  // return `${weekday}, ${month} ${day}, ${hours}:${minutes}${ampm}`;
   return `${weekday}, ${month} ${day}, ${date.getFullYear()}, ${hours}:${minutes}${ampm}`;
-};
-
-export const convertStringToDateLocal = (dateString) => {
-  // Create a date object from the date string
-  const date = new Date(dateString);
-
-  // Get the year, month, and day from the date object
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; // Month is zero-indexed, so add 1
-  const day = date.getDate();
-
-  // Get the hours and minutes from the date object
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-
-  // Return the date in the format "YYYY-MM-DDTHH:MM"
-  return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
