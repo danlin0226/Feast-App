@@ -3,10 +3,10 @@ import { useLocation } from "react-router-dom";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
+import "./CardListings.scss";
 
 import Card from "../../components/card/Card";
 import Modal from "../../components/modal/Modal";
-import "./CardListings.scss";
 
 const CardListings = ({
   isHosting,
@@ -14,19 +14,53 @@ const CardListings = ({
   userRequestPosts,
   editable,
   deletable,
+  heroSearch,
 }) => {
   let location = useLocation();
 
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState();
   const [isDelete, setIsDelete] = useState(false);
+  const [cuisineFilter, setCuisineFilter] = useState("");
+  const [mealFilter, setMealFilter] = useState("");
 
   let hostingPosts;
 
   if (isHosting) {
     hostingPosts = posts.filter((post) => post.user_id === uid);
-    console.log(hostingPosts);
   }
+
+  const filterPosts = posts.filter((post) => {
+    if (cuisineFilter === "" && mealFilter === "" && heroSearch === "") {
+      return post;
+    }
+    if (mealFilter === "" && heroSearch === "") {
+      return post.cuisine === cuisineFilter;
+    }
+    if (cuisineFilter === "" && heroSearch === "") {
+      return post.meal === mealFilter;
+    }
+    if (cuisineFilter === "" && mealFilter === "") {
+      return post.address.includes(heroSearch);
+    }
+    if (cuisineFilter === "") {
+      return post.address.includes(heroSearch) && post.meal === mealFilter;
+    }
+    if (mealFilter === "") {
+      return (
+        post.address.includes(heroSearch) && post.cuisine === cuisineFilter
+      );
+    }
+    if (heroSearch === "") {
+      return post.meal === mealFilter && post.cuisine === cuisineFilter;
+    } else {
+      return (
+        post.meal === mealFilter &&
+        post.cuisine === cuisineFilter &&
+        post.address.includes(heroSearch)
+      );
+    }
+  });
 
   useEffect(() => {
     axios.get("http://localhost:8080/").then((res) => {
@@ -64,15 +98,58 @@ const CardListings = ({
   return (
     <section className="listings">
       <div className="listings__filters">
-        <select name="cuisines" id="cuisines">
-          <option value="chinese">chinese</option>
-        </select>
-        <select name="cuisines" id="cuisines">
-          <option value="chinese">chinese</option>
-        </select>
-        <select name="cuisines" id="cuisines">
-          <option value="chinese">chinese</option>
-        </select>
+        {deletable || (
+          <>
+            <select
+              className="listings__dropdown"
+              name="cuisine"
+              id="cuisine"
+              onChange={(e) => {
+                setCuisineFilter(e.target.value);
+              }}
+            >
+              <option value="" defaultValue>
+                All Cuisines
+              </option>
+              <option>American</option>
+              <option>Canadian</option>
+              <option>Chinese</option>
+              <option>Filipino</option>
+              <option>French</option>
+              <option>Greek</option>
+              <option>Indian</option>
+              <option>Indonesian</option>
+              <option>Italian</option>
+              <option>Jamaican</option>
+              <option>Japanese</option>
+              <option>Korean</option>
+              <option>Lebanese</option>
+              <option>Mexican</option>
+              <option>Spanish</option>
+              <option>Thai</option>
+              <option>Turkish</option>
+              <option>Vietnamese</option>
+            </select>
+            <select
+              className="listings__dropdown"
+              name="meal"
+              id="meal"
+              onChange={(e) => {
+                setMealFilter(e.target.value);
+              }}
+            >
+              <option value="" defaultValue>
+                All Meal Types
+              </option>
+              <option>Breakfast</option>
+              <option>Brunch</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Drinks</option>
+              <option>Appies</option>
+            </select>
+          </>
+        )}
       </div>
       <div className="listings__card-cont">
         {userRequestPosts &&
@@ -92,7 +169,7 @@ const CardListings = ({
             );
           })}
         {location.pathname === "/explore" &&
-          posts.map((post) => {
+          filterPosts.map((post) => {
             return <Card key={post.id} data={post} />;
           })}
       </div>

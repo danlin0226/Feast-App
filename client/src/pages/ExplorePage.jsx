@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import CardListings from "../components/card-listings/CardListings";
 import Hero from "../components/hero/Hero";
 
-const ExplorePage = () => {
+const ExplorePage = ({ isLoaded }) => {
+  const [heroSearch, setHeroSearch] = useState("");
   return (
     <>
-      <Hero />
-      <CardListings />
+      <Hero setHeroSearch={setHeroSearch} isLoaded={isLoaded} />
+      <CardListings heroSearch={heroSearch} />
     </>
   );
 };

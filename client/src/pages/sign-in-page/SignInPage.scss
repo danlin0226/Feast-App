@@ -1,0 +1,32 @@
+@use "../../main.scss" as *;
+
+.authPage {
+  display: flex;
+  height: 100vh;
+
+  &__left {
+    width: 50%;
+    position: relative;
+  }
+
+  &__logo {
+    position: absolute;
+    top: 34px;
+    left: 34px;
+  }
+
+  &__right {
+    flex: 1;
+    @include flex-row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 112px;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: -6px;
+    object-fit: cover;
+  }
+}

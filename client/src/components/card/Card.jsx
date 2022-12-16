@@ -1,11 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "./Card.scss";
+
 import pin from "../../assets/icons/map-pin.svg";
 import userCircle from "../../assets/icons/user-circle.svg";
 import close from "../../assets/icons/close.png";
-
-import { Link } from "react-router-dom";
-
-import "./Card.scss";
 
 const Card = ({ data, editable, deletable, selectPostHandler }) => {
   return (
@@ -17,12 +16,16 @@ const Card = ({ data, editable, deletable, selectPostHandler }) => {
       }
     >
       <article className="card">
-        <img className="card__img" src={data.image} alt="" />
+        <img
+          className="card__img"
+          src={data.image}
+          alt="user submitted food photography"
+        />
         {deletable && (
           <img
             className="card__close"
             src={close}
-            alt=""
+            alt="x icon"
             onClick={(e) => {
               selectPostHandler(e, data.id);
             }}
@@ -33,12 +36,12 @@ const Card = ({ data, editable, deletable, selectPostHandler }) => {
           <div className="card__info-cont">
             <h4 className="card__subheader">{data.time}</h4>
             <div className="card__label">
-              <img className="card__icon" src={pin} alt="" />
+              <img className="card__icon" src={pin} alt="pin icon" />
               <p className="card__text">{data.address}</p>
             </div>
             <div className="card__label">
-              <img className="card__icon" src={userCircle} alt="" />
-              <p className="card__text">{`2/${data.spots} spots available`}</p>
+              <img className="card__icon" src={userCircle} alt="circle icon" />
+              <p className="card__text">{`${data.spots}/${data.spots} spots available`}</p>
             </div>
           </div>
         </div>

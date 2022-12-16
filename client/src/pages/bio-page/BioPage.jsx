@@ -1,12 +1,13 @@
 import React from "react";
 import "./BioPage.scss";
-
 import { useNavigate } from "react-router-dom";
+
 import chevron from "../../assets/icons/chevron.png";
 import gender from "../../assets/icons/bigender.svg";
 import cake from "../../assets/icons/cake.svg";
 import fb from "../../assets/icons/fb-orange.svg";
 import ig from "../../assets/icons/ig-orange.svg";
+
 import Avatar from "../../components/avatar/Avatar";
 
 const Bio = ({ userBio }) => {
@@ -19,7 +20,7 @@ const Bio = ({ userBio }) => {
           navigate(-1);
         }}
       >
-        <img className="details__icon" src={chevron} alt="" />
+        <img className="details__icon" src={chevron} alt="chevron icon" />
         Back to Explore
       </p>
       <div className="bio">
@@ -28,11 +29,11 @@ const Bio = ({ userBio }) => {
           <p className="bio__name">{userBio.name}</p>
           <div className="bio__stats-cont">
             <p className="bio__stats">
-              <img src={gender} alt="" />
+              <img src={gender} alt="male and female sign" />
               {userBio.gender}
             </p>
             <p className="bio__stats">
-              <img src={cake} alt="" />
+              <img src={cake} alt="cake icon" />
               {`${userBio.age} years old`}
             </p>
           </div>
@@ -54,8 +55,8 @@ const Bio = ({ userBio }) => {
             <p className="bio__prompt-text">{userBio.prompt3}</p>
           </div>
           <div className="bio__socials">
-            <img src={fb} alt="" />
-            <img src={ig} alt="" />
+            <img src={fb} alt="logo for facebook" />
+            <img src={ig} alt="square camera representing instagram" />
           </div>
         </div>
       </div>

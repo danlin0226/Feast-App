@@ -15,6 +15,11 @@
     width: 100%;
   }
 
+  &__edit-title {
+    @include sh1;
+    padding: 16px 0px 0px 48px;
+  }
+
   &__breadcrumb-text {
     @include b1;
     @include flex-row;
@@ -53,6 +58,7 @@
     @include flex-row;
     margin-top: 32px;
     max-width: 1440px;
+    width: 100%;
   }
   &__left-cont {
     flex: 1;

@@ -10,6 +10,10 @@
   &__input {
     @include input;
     @include b1;
+
+    &--dropdown {
+      @include dropdown(#f1f1f1);
+    }
   }
 
   &__error {
