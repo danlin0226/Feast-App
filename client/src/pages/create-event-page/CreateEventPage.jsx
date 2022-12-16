@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import "./CreateEventPage.scss";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import "./CreateEventPage.scss";
 import { useNavigate } from "react-router-dom";
-import chevron from "../../assets/icons/chevron.png";
-import success from "../../assets/success.png";
 
 import { Uploader } from "uploader"; // Installed by "react-uploader".
 import { UploadDropzone } from "react-uploader";
 
+import chevron from "../../assets/icons/chevron.png";
+import success from "../../assets/success.png";
+
 import FormInput from "../../components/formInput/FormInput";
 import Modal from "../../components/modal/Modal";
-import { useEffect } from "react";
 
 import { convertDateLocalToString } from "../../utils/dateConversion";
 
@@ -47,13 +46,31 @@ const MyDropzone = ({ setFiles }) => (
   />
 );
 
-const MyUploadedFiles = ({ files }) =>
+const MyUploadedFiles = ({ files, postToEdit }) =>
   files.map((file) => {
     const filePath = file.filePath;
     const fileUrl = uploader.url(filePath, "raw"); // "raw" for un-transformed file.
+
+    if (postToEdit) {
+      console.log(postToEdit.image);
+      return (
+        <p key={postToEdit.image}>
+          <img
+            className="uploaded-img"
+            src={postToEdit.image}
+            alt="food the user has submitted"
+          />
+        </p>
+      );
+    }
+
     return (
       <p key={fileUrl}>
-        <img className="uploaded-img" src={fileUrl} alt="" />
+        <img
+          className="uploaded-img"
+          src={fileUrl}
+          alt="food that the user has inputted"
+        />
       </p>
     );
   });
@@ -61,8 +78,6 @@ const MyUploadedFiles = ({ files }) =>
 const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
-  console.log("post", postToEdit);
-
   const [values, setValues] = useState({
     name: "",
     location: "",
@@ -78,10 +93,11 @@ const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
   useEffect(() => {
     if (edit) {
       setValues(postToEdit);
+      // console.log(postToEdit.image);
+      // setFiles(postToEdit.image);f
     }
   }, [postToEdit, edit]);
   const [errors, setErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
   const [eventCreated, setEventCreated] = useState(false);
 
   const inputs = [
@@ -149,7 +165,6 @@ const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
     },
   ];
 
-  console.log(values);
   const submitHandler = (e) => {
     e.preventDefault();
     setErrors(validate(values));
@@ -164,19 +179,9 @@ const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
       !values.cuisine ||
       !values.meal
     ) {
-      console.log("Not submitted");
       return;
     }
 
-    console.log({
-      name: values.name,
-      image: files[0].fileUrl,
-      location: values.location,
-      time: values.time,
-      about: values.about,
-      spots: values.spots,
-      address: values.address,
-    });
     axios.post(
       "http://localhost:8080/posts/",
       {
@@ -196,9 +201,7 @@ const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
       }
     );
 
-    console.log("successfully submitted");
-
-    setIsSubmit(true);
+    setEventCreated(true);
   };
 
   const validate = (values) => {
@@ -246,17 +249,27 @@ const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
           navigate(-1);
         }}
       >
-        <img className="details__icon" src={chevron} alt="" />
-        Back to Explore
+        <img className="details__icon" src={chevron} alt="chevron logo" />
+        Back
       </p>
-      {edit && <h1 className="details__title">Edit Event</h1>}
-      <div className="create-event__dropzone">
-        {files.length ? (
-          <MyUploadedFiles files={files} />
-        ) : (
-          <MyDropzone setFiles={setFiles} />
-        )}
-      </div>
+      {edit && <h1 className="details__edit-title">Edit Event</h1>}
+      {postToEdit ? (
+        <p key={postToEdit.image}>
+          <img
+            className="uploaded-img"
+            src={postToEdit.image}
+            alt="food that the user has submitted"
+          />
+        </p>
+      ) : (
+        <div className="create-event__dropzone">
+          {files.length ? (
+            <MyUploadedFiles files={files} postToEdit={postToEdit} />
+          ) : (
+            <MyDropzone setFiles={setFiles} />
+          )}
+        </div>
+      )}
       <form className="form" onSubmit={submitHandler}>
         {inputs.map((input) => {
           return (
@@ -272,20 +285,19 @@ const CreateEventPage = ({ token, edit, postToEdit, isLoaded }) => {
             />
           );
         })}
-        <button
-          onClick={() => {
-            setEventCreated(true);
-          }}
-          className="form__button"
-        >
-          Submit
+        <button className="form__button">
+          {edit ? "Save changes" : "Submit"}
         </button>
       </form>
       {eventCreated && (
         <Modal setIsOpen={setEventCreated}>
           <div className="success-modal">
             <h1 className="success-modal__title">Event Created!</h1>
-            <img className="success-modal__img" src={success} alt="" />
+            <img
+              className="success-modal__img"
+              src={success}
+              alt="celebration with confetti"
+            />
             <p className="success-modal__text">
               Hang tight while other foodies request to join your event!
             </p>

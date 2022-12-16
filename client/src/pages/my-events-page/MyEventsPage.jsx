@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./MyEventsPage.scss";
+
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import "./MyEventsPage.scss";
 
 import CardListings from "../../components/card-listings/CardListings";
 
@@ -23,7 +24,6 @@ const MyEventsPage = ({ uid }) => {
         })
         .then((res) => {
           setUserRequestPosts(res.data);
-          console.log("answer", res.data);
         });
     });
   }, []);

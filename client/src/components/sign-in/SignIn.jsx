@@ -1,35 +1,23 @@
-import React, { useEffect, useState } from "react";
-import "./SignIn.scss";
+import React, { useState } from "react";
 import axios from "axios";
-
+import "./SignIn.scss";
 import {
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-
 import { auth } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 
-const LogIn = ({ setSignedIn, textContent }) => {
+const LogIn = ({ textContent }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const [token, setToken] = useState("");
-  const [user, setUser] = useState({});
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-  }, []);
 
   const logIn = async (e) => {
     e.preventDefault();
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/explore");
     } catch (error) {
       console.log(error.message);

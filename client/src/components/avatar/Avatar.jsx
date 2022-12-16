@@ -16,7 +16,7 @@ const Avatar = ({ id, avatar, large, medium, handleSelectAttendee }) => {
         className="avatar"
         src={avatar}
         onError={(i) => (i.target.style.display = "none")}
-        alt=""
+        alt="user headshot"
       />
     </div>
   );

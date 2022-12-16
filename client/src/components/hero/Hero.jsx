@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
+import { Autocomplete } from "@react-google-maps/api";
 
 import "./Hero.scss";
 
@@ -12,13 +12,8 @@ const Hero = ({ setHeroSearch, isLoaded }) => {
   }
 
   function onPlaceChanged() {
-    console.log("search result", searchResult);
-
     if (searchResult != null) {
-      console.log(searchResult);
       const place = searchResult.getPlace();
-      console.log("place", place);
-      const name = place.name;
       setSearchString(place.address_components[0].long_name);
     } else {
       alert("Please enter text");

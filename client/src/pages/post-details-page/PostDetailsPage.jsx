@@ -3,14 +3,13 @@ import axios from "axios";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, MarkerF } from "@react-google-maps/api";
 
 import "./PostDetailsPage.scss";
 
 import chevron from "../../assets/icons/chevron.png";
 import pin from "../../assets/icons/map-pin-teal.svg";
 import calendar from "../../assets/icons/calendar.svg";
-import map from "../../assets/maps-placeholder.png";
 import edit from "../../assets/icons/edit.svg";
 import success from "../../assets/success.png";
 import gender from "../../assets/icons/bigender.svg";
@@ -58,7 +57,7 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
   useEffect(() => {
     onAuthStateChanged(auth, async () => {
       const token = await auth.currentUser.getIdToken();
-      console.log(token);
+
       axios
         .get(`http://localhost:8080/posts/${params.id}`, {
           headers: {
@@ -160,18 +159,20 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
   };
 
   if (!isLoaded) {
-    console.log(isLoaded);
     return <div>Is loading</div>;
   }
 
   if (!postData.geo) {
-    console.log(isLoaded);
     return <div>Is loading</div>;
   }
 
   return (
     <section className="details">
-      <img className="details__hero" src={postData.image} alt="" />
+      <img
+        className="details__hero"
+        src={postData.image}
+        alt="food that the user has submitted"
+      />
       <div className="details__top-cont">
         <p
           className="details__breadcrumb-text"
@@ -179,8 +180,8 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
             navigate(-1);
           }}
         >
-          <img className="details__icon" src={chevron} alt="" />
-          Back to Explore
+          <img className="details__icon" src={chevron} alt="chevron icon" />
+          {editable ? "Back to My Events" : "Back to Explore"}
         </p>
 
         <div className="details__tag-cont">
@@ -188,7 +189,7 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
           <div className="details__tag">{postData.meal}</div>
           {editable && (
             <Link to={`/edit-event/${postData.id}`} className="details__edit">
-              <img className="details__icon" src={edit} alt="" />
+              <img className="details__icon" src={edit} alt="pencil icon" />
               Edit Event
             </Link>
           )}
@@ -214,11 +215,15 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
 
           <div className="details__info-card-cont">
             <div className="details__info-card">
-              <img className="details__icon" src={calendar} alt="" />
+              <img
+                className="details__icon"
+                src={calendar}
+                alt="calendar logo"
+              />
               {postData.time}
             </div>
             <div className="details__info-card">
-              <img className="details__icon" src={pin} alt="" />
+              <img className="details__icon" src={pin} alt="map pin" />
               {postData.address}
             </div>
           </div>
@@ -236,7 +241,7 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
               <MarkerF position={JSON.parse(postData.geo)} />
             </GoogleMap>
           </div>
-          <img className="details__map" src={map} alt="" />
+          <img className="details__map" src={map} alt="map pin" />
           <h4 className="details__about-title">About the Event</h4>
           <p className="details__about-text">{postData.about}</p>
         </div>
@@ -316,7 +321,7 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
             >
               <div className="request-modal__form-item">
                 <label htmlFor="prompt1" className="request-modal__label">
-                  Why do you want to come to this event
+                  Why do you want to come to this event?
                 </label>
                 <textarea
                   className="request-modal__input"
@@ -327,7 +332,7 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
               </div>
               <div className="request-modal__form-item">
                 <label htmlFor="prompt2" className="request-modal__label">
-                  Why do you want to come to this event
+                  Whats your favourite dish and why?
                 </label>
                 <textarea
                   className="request-modal__input"
@@ -345,7 +350,11 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
         <Modal setIsOpen={setIsSubmitted}>
           <div className="success-modal">
             <h1 className="success-modal__title">Request Submitted!</h1>
-            <img className="success-modal__img" src={success} alt="" />
+            <img
+              className="success-modal__img"
+              src={success}
+              alt="celebration with confetti"
+            />
             <p className="success-modal__text">
               You will get a notification once the host accepts or rejects your
               requests
@@ -366,17 +375,14 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
             <div className="modal-bio">
               <div className="modal-bio__middle-cont">
                 <Avatar avatar={selectedAttendee.avatar} medium={true} />
-                <p className="modal-bio__name">
-                  {selectedAttendee.name}
-                  {selectedAttendee.id}
-                </p>
+                <p className="modal-bio__name">{selectedAttendee.name}</p>
                 <div className="modal-bio__stats-cont">
                   <p className="modal-bio__stats">
-                    <img src={gender} alt="" />
+                    <img src={gender} alt="male and female sign" />
                     {selectedAttendee.gender}
                   </p>
                   <p className="modal-bio__stats">
-                    <img src={cake} alt="" />
+                    <img src={cake} alt="birthday cake icon" />
                     {`${selectedAttendee.age} years old`}
                   </p>
                 </div>
@@ -423,8 +429,8 @@ const PostDetailsPage = ({ token, editable, isLoaded }) => {
                   </p>
                 </div>
                 <div className="modal-bio__socials">
-                  <img src={fb} alt="" />
-                  <img src={ig} alt="" />
+                  <img src={fb} alt="fb in blue font" />
+                  <img src={ig} alt="square camera logo" />
                 </div>
               </div>
             </div>

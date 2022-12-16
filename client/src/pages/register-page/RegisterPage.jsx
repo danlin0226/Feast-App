@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import SignIn from "../../components/sign-in/SignIn";
+import "./RegisterPage.scss";
+
 import authImg from "../../assets/auth.jpg";
 import whiteLogo from "../../assets/logo/logo-white.svg";
-import "./RegisterPage.scss";
+
+import SignIn from "../../components/sign-in/SignIn";
 
 const RegisterPage = ({ setShowNav }) => {
   const textContent = {
@@ -17,7 +19,7 @@ const RegisterPage = ({ setShowNav }) => {
 
   useEffect(() => {
     setShowNav(false);
-  }, []);
+  }, [setShowNav]);
   return (
     <section className="authPage">
       <div className="authPage__left">
@@ -27,9 +29,17 @@ const RegisterPage = ({ setShowNav }) => {
             setShowNav(true);
           }}
         >
-          <img className="authPage__logo" src={whiteLogo} alt="" />
+          <img
+            className="authPage__logo"
+            src={whiteLogo}
+            alt="cursive letters spelling feast"
+          />
         </Link>
-        <img className="authPage__img" src={authImg} alt="" />
+        <img
+          className="authPage__img"
+          src={authImg}
+          alt="food laid out on a large table"
+        />
       </div>
       <div className="authPage__right">
         <SignIn textContent={textContent} />

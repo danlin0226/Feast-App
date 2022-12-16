@@ -149,12 +149,9 @@ const FormInput = ({
       setSearchResult(autocomplete);
     }
     function onPlaceChanged() {
-      console.log("search result", searchResult);
-
       if (searchResult != null) {
         //variable to store the result
         const place = searchResult.getPlace();
-        console.log("place", place);
         //variable to store the name from place details result
         const name = place.name;
 

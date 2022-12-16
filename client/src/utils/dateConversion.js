@@ -72,6 +72,3 @@ export const convertStringToDateLocal = (dateString) => {
   // Return the date in the format "YYYY-MM-DDTHH:MM"
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
-
-// const x = convertDate("2022-12-12T16:22");
-// console.log(x);

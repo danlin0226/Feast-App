@@ -3,10 +3,10 @@ import { useLocation } from "react-router-dom";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
+import "./CardListings.scss";
 
 import Card from "../../components/card/Card";
 import Modal from "../../components/modal/Modal";
-import "./CardListings.scss";
 
 const CardListings = ({
   isHosting,
@@ -98,54 +98,58 @@ const CardListings = ({
   return (
     <section className="listings">
       <div className="listings__filters">
-        <select
-          className="listings__dropdown"
-          name="cuisine"
-          id="cuisine"
-          onChange={(e) => {
-            setCuisineFilter(e.target.value);
-          }}
-        >
-          <option value="" defaultValue>
-            All Cuisines
-          </option>
-          <option>American</option>
-          <option>Canadian</option>
-          <option>Chinese</option>
-          <option>Filipino</option>
-          <option>French</option>
-          <option>Greek</option>
-          <option>Indian</option>
-          <option>Indonesian</option>
-          <option>Italian</option>
-          <option>Jamaican</option>
-          <option>Japanese</option>
-          <option>Korean</option>
-          <option>Lebanese</option>
-          <option>Mexican</option>
-          <option>Spanish</option>
-          <option>Thai</option>
-          <option>Turkish</option>
-          <option>Vietnamese</option>
-        </select>
-        <select
-          className="listings__dropdown"
-          name="meal"
-          id="meal"
-          onChange={(e) => {
-            setMealFilter(e.target.value);
-          }}
-        >
-          <option value="" defaultValue>
-            All Meal Types
-          </option>
-          <option>Breakfast</option>
-          <option>Brunch</option>
-          <option>Lunch</option>
-          <option>Dinner</option>
-          <option>Drinks</option>
-          <option>Appies</option>
-        </select>
+        {deletable || (
+          <>
+            <select
+              className="listings__dropdown"
+              name="cuisine"
+              id="cuisine"
+              onChange={(e) => {
+                setCuisineFilter(e.target.value);
+              }}
+            >
+              <option value="" defaultValue>
+                All Cuisines
+              </option>
+              <option>American</option>
+              <option>Canadian</option>
+              <option>Chinese</option>
+              <option>Filipino</option>
+              <option>French</option>
+              <option>Greek</option>
+              <option>Indian</option>
+              <option>Indonesian</option>
+              <option>Italian</option>
+              <option>Jamaican</option>
+              <option>Japanese</option>
+              <option>Korean</option>
+              <option>Lebanese</option>
+              <option>Mexican</option>
+              <option>Spanish</option>
+              <option>Thai</option>
+              <option>Turkish</option>
+              <option>Vietnamese</option>
+            </select>
+            <select
+              className="listings__dropdown"
+              name="meal"
+              id="meal"
+              onChange={(e) => {
+                setMealFilter(e.target.value);
+              }}
+            >
+              <option value="" defaultValue>
+                All Meal Types
+              </option>
+              <option>Breakfast</option>
+              <option>Brunch</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Drinks</option>
+              <option>Appies</option>
+            </select>
+          </>
+        )}
       </div>
       <div className="listings__card-cont">
         {userRequestPosts &&

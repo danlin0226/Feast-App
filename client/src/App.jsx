@@ -1,20 +1,17 @@
+import { useEffect, useState } from "react";
 import "./App.scss";
-
+import axios from "axios";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
+import { useJsApiLoader } from "@react-google-maps/api";
 
+//components
 import ExplorePage from "./pages/ExplorePage";
-
 import Header from "./components/header/Header";
-// import CardListings from "./components/card-listings/CardListings";
 import Footer from "./components/footer/Footer";
-
 import BioPage from "./pages/bio-page/BioPage";
 import PostDetailsPage from "./pages/post-details-page/PostDetailsPage";
-import { useEffect, useState } from "react";
-import { useJsApiLoader } from "@react-google-maps/api";
-import axios from "axios";
 import CreateEventPage from "./pages/create-event-page/CreateEventPage";
 import EditEventPage from "./pages/edit-event-page/EditEventPage";
 import MyEventsPage from "./pages/my-events-page/MyEventsPage";
@@ -43,7 +40,6 @@ function App() {
             },
           })
           .then((res) => {
-            console.log(res.data);
             setUserBio(res.data);
             setSignedIn(true);
             setShowNav(true);
@@ -52,10 +48,6 @@ function App() {
       }
     });
   }, []);
-
-  const signIn = (data) => {
-    setUser(data);
-  };
 
   return (
     <>
@@ -110,7 +102,13 @@ function App() {
         />
         <Route
           path="/edit-event/:id"
-          element={<EditEventPage edit={true} token={user.accessToken} />}
+          element={
+            <EditEventPage
+              edit={true}
+              token={user.accessToken}
+              isLoaded={isLoaded}
+            />
+          }
         />
         <Route path="*" element={<Navigate to="/explore" />} />
       </Routes>

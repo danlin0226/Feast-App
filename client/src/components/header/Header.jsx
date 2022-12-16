@@ -1,23 +1,21 @@
 import React from "react";
-import "./Header.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
-
-import Avatar from "../../components/avatar/Avatar";
+import "./Header.scss";
 
 import logo from "../../assets/logo/feast-logo.svg";
 import plus from "../../assets/icons/circle-plus.svg";
 
-const Header = ({ userBio, setUserBio, signedIn, setSignedIn }) => {
-  console.log("signed IN", signedIn);
+import Avatar from "../../components/avatar/Avatar";
+
+const Header = ({ userBio, signedIn, setSignedIn }) => {
   const navigate = useNavigate();
 
   const logOut = async (e) => {
     e.preventDefault();
     const status = await signOut(auth);
     console.log("status", status);
-    // setUserBio({});
     setSignedIn(false);
     navigate("/explore");
     window.location.reload();
@@ -27,7 +25,11 @@ const Header = ({ userBio, setUserBio, signedIn, setSignedIn }) => {
     <div className="header">
       <div className="header__left">
         <Link to="/explore">
-          <img className="header__logo" src={logo} alt="" />
+          <img
+            className="header__logo"
+            src={logo}
+            alt="cursive letters spelling feast"
+          />
         </Link>
         <h4 className="header__link">
           <NavLink
@@ -50,7 +52,11 @@ const Header = ({ userBio, setUserBio, signedIn, setSignedIn }) => {
       <div className="header__right">
         <Link to="/create-event">
           <div className="header__create-event">
-            <img className="header__create-icon" src={plus} alt="" />
+            <img
+              className="header__create-icon"
+              src={plus}
+              alt="plus sign icon"
+            />
             <p className="header__create-text">Create Event</p>
           </div>
         </Link>

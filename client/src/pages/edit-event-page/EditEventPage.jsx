@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useParams } from "react-router-dom";
+
 import CreateEventPage from "../create-event-page/CreateEventPage";
 
-const EditEventPage = ({ edit, token }) => {
+const EditEventPage = ({ edit, token, isLoaded }) => {
   const [postToEdit, setPostToEdit] = useState({
     name: "",
     location: "",
@@ -32,11 +34,16 @@ const EditEventPage = ({ edit, token }) => {
           setPostToEdit(res.data);
         });
     });
-  }, []);
+  }, [params.id]);
 
   return (
     <>
-      <CreateEventPage edit={edit} token={token} postToEdit={postToEdit} />
+      <CreateEventPage
+        isLoaded={isLoaded}
+        edit={edit}
+        token={token}
+        postToEdit={postToEdit}
+      />
     </>
   );
 };

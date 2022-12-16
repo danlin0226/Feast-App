@@ -15,6 +15,11 @@
     width: 100%;
   }
 
+  &__edit-title {
+    @include sh1;
+    padding: 16px 0px 0px 48px;
+  }
+
   &__breadcrumb-text {
     @include b1;
     @include flex-row;

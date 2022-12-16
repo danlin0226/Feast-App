@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./Modal.scss";
 
 import close from "../../assets/icons/close.png";
@@ -18,7 +17,7 @@ function Modal({ children, setIsOpen, smallModal, largeModal }) {
               className="modal__close"
               onClick={() => setIsOpen(false)}
               src={close}
-              alt=""
+              alt="x icon"
             />
             {children}
           </div>
