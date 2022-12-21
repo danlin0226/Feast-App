@@ -2,7 +2,7 @@
 
 Feast is a modern web app that allows foodies to connect by hosting and attending dining events. The app allows users to quickly and easily find any meetups happening in their area and participate in events by sending/approving requests.
 
-![image](https://i.postimg.cc/zvWHbsC1/GIF-Recording-2022-12-21-at-1-39-02-AM.gif)
+![gif](https://github.com/danlin0226/Feast-App/blob/dev/demo/GIF%20Recording%202022-12-21%20at%201.39.02%20AM.gif)
 
 ## Table of Contents
 
