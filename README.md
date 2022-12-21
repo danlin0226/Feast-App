@@ -1,6 +1,6 @@
 # Feast App
 
-Feast is a modern web app that allows foodies to connect by hosting and attending dining events. The app allows users to quickly and easily find any meetups happening in their area and participate by going through a simple sign up process.
+Feast is a modern web app that allows foodies to connect by hosting and attending dining events. The app allows users to quickly and easily find any meetups happening in their area and participate in events by sending/approving requests.
 
 ![image](https://user-images.githubusercontent.com/107284019/208053991-e8fe663b-ec26-443a-b946-a565bd7aaec1.png)
 
@@ -58,7 +58,7 @@ DB_LOCAL_PASSWORD=<PASSWORD>
 }
 ```
 
-#### Create a schema of DB_LOCAL_DBNAME in mysql workbench
+#### Create a schema of `DB_LOCAL_DBNAME` in mysql workbench
 
 #### Create Firebase service key file
 
