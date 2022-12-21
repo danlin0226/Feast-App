@@ -2,7 +2,7 @@
 
 Feast is a modern web app that allows foodies to connect by hosting and attending dining events. The app allows users to quickly and easily find any meetups happening in their area and participate in events by sending/approving requests.
 
-![image](https://user-images.githubusercontent.com/107284019/208053991-e8fe663b-ec26-443a-b946-a565bd7aaec1.png)
+![image](https://i.postimg.cc/zvWHbsC1/GIF-Recording-2022-12-21-at-1-39-02-AM.gif)
 
 ## Table of Contents
 
@@ -58,11 +58,11 @@ DB_LOCAL_PASSWORD=<PASSWORD>
 }
 ```
 
-#### Create a schema of `DB_LOCAL_DBNAME` in mysql workbench
+#### Create a schema of `DB_LOCAL_DBNAME` in mySQL workbench
 
 #### Create Firebase service key file
 
-#### From the root folder, run following commands
+#### From the root folder, run the following commands
 
 ```console
 npm i
@@ -85,7 +85,7 @@ npm run dev
 
 ### Explore events / manage attendees
 
-- Google maps api pinpoints restaurant location
+- Google Maps API pinpoints restaurant location
 - Event is fully editable using a patch request to the server
 - Host can easily view attendee profiles and reject and accept requests
   ![image3](https://user-images.githubusercontent.com/107284019/208057665-18c5f62a-8bde-4474-8a34-6bf17663d0d5.png)
@@ -106,7 +106,7 @@ npm run dev
 - Frontend: React
 - Backend: NodeJS/Express
 - Database: MySQL, Knex
-- Styling: HTML,CSS,SASS
+- Styling: HTML, CSS,SASS
 
 ## Future Improvements
 
