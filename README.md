@@ -106,7 +106,7 @@ npm run dev
 - Frontend: React
 - Backend: NodeJS/Express
 - Database: MySQL, Knex
-- Styling: HTML, CSS,SASS
+- Styling: HTML, CSS, SASS
 
 ## Future Improvements
 
